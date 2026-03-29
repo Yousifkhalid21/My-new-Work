@@ -111,6 +111,11 @@
 				background: rgba(255, 255, 255, 0.7);
 			}
 
+			.field-invalid {
+				border-color: rgba(251, 146, 132, 0.72);
+				box-shadow: 0 0 0 3px rgba(251, 146, 132, 0.16);
+			}
+
 			.check-animate {
 				animation: popCheck 0.4s ease forwards;
 			}
@@ -118,6 +123,12 @@
 			.cta-glow:hover {
 				transform: translateY(-2px);
 				box-shadow: 0 0 0 1px rgba(147, 51, 234, 0.45), 0 14px 35px rgba(147, 51, 234, 0.34);
+			}
+
+			.cta-disabled {
+				opacity: 0.55;
+				cursor: not-allowed;
+				box-shadow: none;
 			}
 		</style>
 	</head>
@@ -190,8 +201,7 @@
 										type="text"
 										inputmode="numeric"
 										maxlength="6"
-										placeholder="مثال: 123456"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none placeholder:text-darkGray/38"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none"
 									/>
 									<span
 										id="idCheck"
@@ -242,8 +252,7 @@
 									<input
 										id="email"
 										type="email"
-										placeholder="name@university.edu"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition"
 										required
 									/>
 								</div>
@@ -253,38 +262,45 @@
 								<span id="labelPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>كلمة المرور</span
 								>
-								<div class="field-shell relative rounded-xl">
-									<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+								<div id="passwordShell" class="field-shell relative rounded-xl">
+									<i data-lucide="lock-keyhole" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
 									<input
 										id="password"
 										type="password"
-										placeholder="••••••••"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none transition"
 										required
 									/>
+									<button type="button" class="toggle-visibility absolute right-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="password" aria-label="Show or hide password">
+										<i data-lucide="eye" class="h-4 w-4"></i>
+									</button>
 								</div>
+								<p id="passwordStrengthHint" class="mt-1 text-xs text-darkGray/65"></p>
 							</label>
 
 							<label class="block">
 								<span id="labelConfirmPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>تأكيد كلمة المرور</span
 								>
-								<div class="field-shell relative rounded-xl">
-									<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+								<div id="confirmPasswordShell" class="field-shell relative rounded-xl">
+									<i data-lucide="lock-keyhole" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
 									<input
 										id="confirmPassword"
 										type="password"
-										placeholder="••••••••"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none transition"
 										required
 									/>
+									<button type="button" class="toggle-visibility absolute right-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="confirmPassword" aria-label="Show or hide confirm password">
+										<i data-lucide="eye" class="h-4 w-4"></i>
+									</button>
 								</div>
+								<p id="passwordMismatch" class="mt-1 hidden text-xs text-[#d9776a]">كلمات المرور غير متطابقة</p>
 							</label>
 
 							<button
 								type="submit"
 								id="registerButton"
-								class="cta-glow mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3 text-base font-bold text-white shadow-soft-lg transition duration-300"
+								class="cta-glow cta-disabled mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3 text-base font-bold text-white shadow-soft-lg transition duration-300"
+								disabled
 							>
 								تسجيل
 							</button>
@@ -307,15 +323,14 @@
 					pageTitle: "تسجيل حساب جديد",
 					pageSubtitle: "أكمل البيانات التالية للانضمام إلى بوابة طلاب الدفعة 43",
 					labelStudentId: "الرقم الجامعي",
-					studentIdPlaceholder: "مثال: 123456",
 					labelFullName: "الاسم الكامل",
 					labelMajor: "التخصص",
 					labelEmail: "البريد الإلكتروني",
-					emailPlaceholder: "name@university.edu",
 					labelPassword: "كلمة المرور",
-					passwordPlaceholder: "••••••••",
 					labelConfirmPassword: "تأكيد كلمة المرور",
-					confirmPasswordPlaceholder: "••••••••",
+					passwordWeakHint: "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي رقمًا ورمزًا خاصًا.",
+					passwordStrongHint: "كلمة المرور قوية.",
+					passwordMismatch: "كلمات المرور غير متطابقة",
 					registerButton: "تسجيل حساب",
 					loginHint: "لديك حساب؟",
 					loginLink: "سجل دخول",
@@ -328,15 +343,14 @@
 					pageTitle: "Create New Account",
 					pageSubtitle: "Complete the form below to join Batch 43 Student Portal",
 					labelStudentId: "Student ID",
-					studentIdPlaceholder: "Example: 123456",
 					labelFullName: "Full Name",
 					labelMajor: "Major",
 					labelEmail: "Email",
-					emailPlaceholder: "name@university.edu",
 					labelPassword: "Password",
-					passwordPlaceholder: "••••••••",
 					labelConfirmPassword: "Confirm Password",
-					confirmPasswordPlaceholder: "••••••••",
+					passwordWeakHint: "Password must be at least 8 characters and include a number and a special symbol.",
+					passwordStrongHint: "Strong password.",
+					passwordMismatch: "Passwords do not match",
 					registerButton: "Register Account",
 					loginHint: "Already have an account?",
 					loginLink: "Login",
@@ -364,24 +378,50 @@
 				email: document.getElementById("email"),
 				labelPassword: document.getElementById("labelPassword"),
 				password: document.getElementById("password"),
+				passwordShell: document.getElementById("passwordShell"),
+				passwordStrengthHint: document.getElementById("passwordStrengthHint"),
 				labelConfirmPassword: document.getElementById("labelConfirmPassword"),
 				confirmPassword: document.getElementById("confirmPassword"),
+				confirmPasswordShell: document.getElementById("confirmPasswordShell"),
+				passwordMismatch: document.getElementById("passwordMismatch"),
 				registerButton: document.getElementById("registerButton"),
 				loginHint: document.getElementById("loginHint"),
 				loginHintText: document.getElementById("loginHintText"),
 				loginLink: document.getElementById("loginLink"),
 			};
 
+			function isStrongPassword(value) {
+				return /^(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value);
+			}
+
+			function validatePasswords() {
+				const t = i18n[currentLang];
+				const pass = el.password.value;
+				const confirm = el.confirmPassword.value;
+				const strong = isStrongPassword(pass);
+				const hasConfirm = confirm.length > 0;
+				const match = strong && hasConfirm && pass === confirm;
+
+				el.passwordStrengthHint.textContent = pass.length === 0 ? "" : strong ? t.passwordStrongHint : t.passwordWeakHint;
+				el.passwordStrengthHint.className = "mt-1 text-xs " + (strong ? "text-emerald-600" : "text-[#d9776a]");
+
+				const mismatch = hasConfirm && pass !== confirm;
+				el.passwordMismatch.textContent = t.passwordMismatch;
+				el.passwordMismatch.classList.toggle("hidden", !mismatch);
+				el.passwordShell.classList.toggle("field-invalid", hasConfirm && !strong);
+				el.confirmPasswordShell.classList.toggle("field-invalid", mismatch);
+
+				el.registerButton.disabled = !match;
+				el.registerButton.classList.toggle("cta-disabled", !match);
+			}
+
 			function updateLanguageButtons() {
 				const activeClass = "bg-gradient-to-r from-accentPurple to-accentIndigo text-white shadow-soft-lg";
 				const inactiveClass = "text-darkGray/70";
+				const baseClass = "rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5 ";
 
-				el.langAr.className =
-					"rounded-full px-3 py-1.5 font-semibold transition duration-300 " +
-					(currentLang === "ar" ? activeClass : inactiveClass);
-				el.langEn.className =
-					"rounded-full px-3 py-1.5 font-semibold transition duration-300 " +
-					(currentLang === "en" ? activeClass : inactiveClass);
+				el.langAr.className = baseClass + (currentLang === "ar" ? activeClass : inactiveClass);
+				el.langEn.className = baseClass + (currentLang === "en" ? activeClass : inactiveClass);
 			}
 
 			function setCheckmarkSide() {
@@ -406,15 +446,11 @@
 				el.pageTitle.textContent = t.pageTitle;
 				el.pageSubtitle.textContent = t.pageSubtitle;
 				el.labelStudentId.textContent = t.labelStudentId;
-				el.studentId.placeholder = t.studentIdPlaceholder;
 				el.labelFullName.textContent = t.labelFullName;
 				el.labelMajor.textContent = t.labelMajor;
 				el.labelEmail.textContent = t.labelEmail;
-				el.email.placeholder = t.emailPlaceholder;
 				el.labelPassword.textContent = t.labelPassword;
-				el.password.placeholder = t.passwordPlaceholder;
 				el.labelConfirmPassword.textContent = t.labelConfirmPassword;
-				el.confirmPassword.placeholder = t.confirmPasswordPlaceholder;
 				el.registerButton.textContent = t.registerButton;
 				el.loginHintText.textContent = t.loginHint;
 				el.loginLink.textContent = t.loginLink;
@@ -427,6 +463,7 @@
 
 				updateLanguageButtons();
 				setCheckmarkSide();
+				validatePasswords();
 			}
 
 			function showCheckmark() {
@@ -460,6 +497,28 @@
 
 			el.langAr.addEventListener("click", () => applyLanguage("ar"));
 			el.langEn.addEventListener("click", () => applyLanguage("en"));
+
+			document.querySelectorAll(".toggle-visibility").forEach((btn) => {
+				btn.addEventListener("click", () => {
+					const targetId = btn.getAttribute("data-target");
+					const field = document.getElementById(targetId);
+					if (!field) {
+						return;
+					}
+
+					const visible = field.type === "text";
+					field.type = visible ? "password" : "text";
+					btn.innerHTML = visible
+						? '<i data-lucide="eye" class="h-4 w-4"></i>'
+						: '<i data-lucide="eye-off" class="h-4 w-4"></i>';
+					if (window.lucide) {
+						window.lucide.createIcons();
+					}
+				});
+			});
+
+			el.password.addEventListener("input", validatePasswords);
+			el.confirmPassword.addEventListener("input", validatePasswords);
 
 			applyLanguage("ar");
 
