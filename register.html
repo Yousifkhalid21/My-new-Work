@@ -13,6 +13,7 @@
 		/>
 
 		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://unpkg.com/lucide@latest"></script>
 		<script>
 			tailwind.config = {
 				darkMode: "class",
@@ -54,17 +55,6 @@
 		</script>
 
 		<style>
-			@keyframes fadeUp {
-				from {
-					opacity: 0;
-					transform: translateY(18px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
 			@keyframes popCheck {
 				0% {
 					opacity: 0;
@@ -80,71 +70,70 @@
 				}
 			}
 
-			@keyframes slideUp {
-				from {
-					opacity: 0;
-					transform: translateY(8px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
+			:root {
+				--bg-a: #fff6f1;
+				--bg-b: #f7f2ff;
+				--bg-c: #fffdf8;
 			}
 
-			.reveal {
-				opacity: 0;
-				animation: fadeUp 0.85s ease forwards;
+			body {
+				background: radial-gradient(circle at 15% 10%, rgba(255, 184, 159, 0.34), transparent 32%),
+					radial-gradient(circle at 82% 18%, rgba(139, 124, 246, 0.22), transparent 38%),
+					radial-gradient(circle at 72% 88%, rgba(255, 211, 186, 0.28), transparent 34%),
+					linear-gradient(145deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+				min-height: 100vh;
 			}
 
-			.d1 {
-				animation-delay: 80ms;
+			.glass {
+				background: linear-gradient(140deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.54));
+				border: 1px solid rgba(255, 255, 255, 0.7);
+				backdrop-filter: blur(14px);
 			}
 
-			.d2 {
-				animation-delay: 220ms;
+			.geo-shape {
+				position: absolute;
+				pointer-events: none;
+				z-index: -1;
+				border: 1px solid rgba(147, 51, 234, 0.18);
+				background: linear-gradient(155deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1));
+				backdrop-filter: blur(8px);
+			}
+
+			.field-shell {
+				background: rgba(255, 255, 255, 0.58);
+				border: 1px solid rgba(147, 51, 234, 0.18);
+				transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+			}
+
+			.field-shell:focus-within {
+				border-color: rgba(147, 51, 234, 0.48);
+				box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.12);
+				background: rgba(255, 255, 255, 0.7);
 			}
 
 			.check-animate {
 				animation: popCheck 0.4s ease forwards;
 			}
 
-			.btn-lift:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 20px 40px rgba(147, 51, 234, 0.25);
-			}
-
-			.btn-lift:active {
-				transform: translateY(-1px);
-			}
-
-			.input-focus:focus {
-				border-color: #9333ea;
-				box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
-			}
-
-			body {
-				background: linear-gradient(135deg, #fce7e7 0%, #fef4d4 35%, #ffffff 100%);
-				min-height: 100vh;
+			.cta-glow:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 0 0 1px rgba(147, 51, 234, 0.45), 0 14px 35px rgba(147, 51, 234, 0.34);
 			}
 		</style>
 	</head>
 
 	<body class="min-h-screen text-darkGray antialiased selection:bg-accentPurple/20 selection:text-accentPurple">
 		<div class="relative isolate overflow-hidden">
+			<div class="geo-shape h-64 w-64 -left-20 top-20 rotate-12 [clip-path:polygon(50%_0%,100%_50%,50%_100%,0%_50%)]"></div>
+			<div class="geo-shape h-72 w-72 -right-28 bottom-8 rotate-6 [clip-path:polygon(50%_0%,95%_35%,78%_100%,22%_100%,5%_35%)]"></div>
 			<div
 				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(248,185,235,0.15),transparent_40%),radial-gradient(circle_at_85%_90%,rgba(165,142,251,0.12),transparent_45%)]"
 			></div>
-			<div
-				class="pointer-events-none absolute top-10 -left-32 -z-10 h-80 w-80 rounded-full bg-softPink/30 blur-3xl opacity-60"
-			></div>
-			<div
-				class="pointer-events-none absolute bottom-10 -right-32 -z-10 h-80 w-80 rounded-full bg-softYellow/20 blur-3xl opacity-60"
-			></div>
+			<div class="pointer-events-none absolute top-10 -left-32 -z-10 h-80 w-80 rounded-full bg-softPink/30 blur-3xl opacity-60"></div>
+			<div class="pointer-events-none absolute bottom-10 -right-32 -z-10 h-80 w-80 rounded-full bg-softYellow/20 blur-3xl opacity-60"></div>
 
 			<header class="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
-				<nav
-					class="reveal d1 flex items-center justify-between rounded-2xl border border-white/60 bg-white/70 px-4 py-3 backdrop-blur-md shadow-soft-lg sm:px-6"
-				>
+				<nav class="glass flex items-center justify-between rounded-2xl px-4 py-3 shadow-soft-lg sm:px-6">
 					<div class="flex items-center gap-3">
 						<span
 							class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-accentPurple to-accentIndigo font-display text-base font-bold text-white"
@@ -152,12 +141,7 @@
 						>
 						<div class="leading-tight">
 							<p class="font-display text-sm tracking-wide text-darkGray">Batch 43</p>
-							<p
-								id="facultyText"
-								class="mt-1 text-[11px] font-light tracking-wide text-darkGray/60 sm:text-xs"
-							>
-								كلية العلوم الرياضية والحاسوب
-							</p>
+							<p id="facultyText" class="mt-1 text-[11px] font-light tracking-wide text-darkGray/60 sm:text-xs">كلية العلوم الرياضية والحاسوب</p>
 						</div>
 					</div>
 
@@ -165,52 +149,53 @@
 						<button
 							type="button"
 							id="langAr"
-							class="rounded-full px-3 py-1.5 font-semibold transition duration-300"
+							class="rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5"
 						>
-							AR
+							<i data-lucide="languages" class="h-3.5 w-3.5"></i>
+							<span>AR</span>
 						</button>
 						<button
 							type="button"
 							id="langEn"
-							class="rounded-full px-3 py-1.5 font-semibold transition duration-300"
+							class="rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5"
 						>
-							EN
+							<i data-lucide="languages" class="h-3.5 w-3.5"></i>
+							<span>EN</span>
 						</button>
 					</div>
 				</nav>
 			</header>
 
-			<main class="mx-auto w-full max-w-6xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
-				<section class="reveal d2 mx-auto max-w-3xl">
-					<div
-						class="rounded-3xl border border-white/70 bg-white/90 p-6 shadow-2xl backdrop-blur-3xl sm:p-8"
-					>
-						<div class="mb-6 text-center">
-							<h1 id="pageTitle" class="font-display text-3xl text-darkGray sm:text-4xl font-bold">
+			<main class="mx-auto w-full max-w-6xl px-5 pb-10 pt-8 sm:px-8 sm:pt-10">
+				<section class="mx-auto max-w-xl">
+					<div class="glass rounded-3xl p-5 shadow-soft-2xl sm:p-6">
+						<div class="mb-4 text-center">
+							<h1 id="pageTitle" class="font-display text-2xl font-medium text-darkGray sm:text-3xl">
 								تسجيل حساب جديد
 							</h1>
-							<p id="pageSubtitle" class="mt-2 text-sm text-darkGray/70 sm:text-base">
+							<p id="pageSubtitle" class="mt-1.5 text-sm font-normal text-darkGray/70">
 								أكمل البيانات التالية للانضمام إلى بوابة طلاب الدفعة 43
 							</p>
 						</div>
 
-						<form id="registerForm" class="grid gap-4" autocomplete="off">
+						<form id="registerForm" class="grid gap-3" autocomplete="off">
 							<label class="block">
-								<span id="labelStudentId" class="mb-2 block text-sm font-semibold text-darkGray"
+								<span id="labelStudentId" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>الرقم الجامعي</span
 								>
-								<div class="relative">
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="id-card" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
 									<input
 										id="studentId"
 										type="text"
 										inputmode="numeric"
 										maxlength="6"
 										placeholder="مثال: 123456"
-										class="w-full rounded-xl border border-gray-300 bg-lightGray/50 px-4 py-3.5 text-darkGray outline-none transition placeholder:text-darkGray/40 input-focus shadow-sm"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none placeholder:text-darkGray/38"
 									/>
 									<span
 										id="idCheck"
-										class="pointer-events-none absolute left-4 top-1/2 hidden -translate-y-1/2 text-2xl text-green-500"
+										class="pointer-events-none absolute left-3 top-1/2 hidden -translate-y-1/2 text-lg text-green-500"
 										aria-hidden="true"
 									>
 										✓
@@ -219,75 +204,95 @@
 							</label>
 
 							<label class="block">
-								<span id="labelFullName" class="mb-2 block text-sm font-semibold text-darkGray"
+								<span id="labelFullName" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>الاسم الكامل</span
 								>
-								<input
-									id="fullName"
-									type="text"
-									disabled
-									readonly
-									class="w-full cursor-not-allowed rounded-xl border border-gray-300 bg-lockGray px-4 py-3.5 text-darkGray/60 outline-none shadow-sm"
-								/>
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="pen-line" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+									<input
+										id="fullName"
+										type="text"
+										disabled
+										readonly
+										class="w-full cursor-not-allowed rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray/70 outline-none"
+									/>
+								</div>
 							</label>
 
 							<label class="block">
-								<span id="labelMajor" class="mb-2 block text-sm font-semibold text-darkGray">التخصص</span>
-								<input
-									id="major"
-									type="text"
-									disabled
-									readonly
-									class="w-full cursor-not-allowed rounded-xl border border-gray-300 bg-lockGray px-4 py-3.5 text-darkGray/60 outline-none shadow-sm"
-								/>
+								<span id="labelMajor" class="mb-1 block text-sm font-medium text-darkGray/90">التخصص</span>
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="scroll-text" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+									<input
+										id="major"
+										type="text"
+										disabled
+										readonly
+										class="w-full cursor-not-allowed rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray/70 outline-none"
+									/>
+								</div>
 							</label>
 
 							<label class="block">
-								<span id="labelEmail" class="mb-2 block text-sm font-semibold text-darkGray"
+								<span id="labelEmail" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>البريد الإلكتروني</span
 								>
-								<input
-									id="email"
-									type="email"
-									placeholder="name@university.edu"
-									class="w-full rounded-xl border border-gray-300 bg-lightGray/50 px-4 py-3.5 text-darkGray outline-none transition placeholder:text-darkGray/40 input-focus shadow-sm"
-									required
-								/>
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="mail" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+									<input
+										id="email"
+										type="email"
+										placeholder="name@university.edu"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										required
+									/>
+								</div>
 							</label>
 
 							<label class="block">
-								<span id="labelPassword" class="mb-2 block text-sm font-semibold text-darkGray"
+								<span id="labelPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>كلمة المرور</span
 								>
-								<input
-									id="password"
-									type="password"
-									placeholder="••••••••"
-									class="w-full rounded-xl border border-gray-300 bg-lightGray/50 px-4 py-3.5 text-darkGray outline-none transition placeholder:text-darkGray/40 input-focus shadow-sm"
-									required
-								/>
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+									<input
+										id="password"
+										type="password"
+										placeholder="••••••••"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										required
+									/>
+								</div>
 							</label>
 
 							<label class="block">
-								<span id="labelConfirmPassword" class="mb-2 block text-sm font-semibold text-darkGray"
+								<span id="labelConfirmPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>تأكيد كلمة المرور</span
 								>
-								<input
-									id="confirmPassword"
-									type="password"
-									placeholder="••••••••"
-									class="w-full rounded-xl border border-gray-300 bg-lightGray/50 px-4 py-3.5 text-darkGray outline-none transition placeholder:text-darkGray/40 input-focus shadow-sm"
-									required
-								/>
+								<div class="field-shell relative rounded-xl">
+									<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+									<input
+										id="confirmPassword"
+										type="password"
+										placeholder="••••••••"
+										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition placeholder:text-darkGray/38"
+										required
+									/>
+								</div>
 							</label>
 
 							<button
 								type="submit"
 								id="registerButton"
-								class="btn-lift mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3.5 text-base font-bold text-white shadow-soft-lg transition duration-300"
+								class="cta-glow mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3 text-base font-bold text-white shadow-soft-lg transition duration-300"
 							>
 								تسجيل
 							</button>
+
+							<p id="loginHint" class="text-center text-sm text-darkGray/70">
+								<span id="loginHintText">لديك حساب؟</span>
+								<a id="loginLink" href="signup.html" class="font-semibold text-accentIndigo hover:text-accentPurple">سجل دخول</a>
+							</p>
 						</form>
 					</div>
 				</section>
@@ -311,7 +316,9 @@
 					passwordPlaceholder: "••••••••",
 					labelConfirmPassword: "تأكيد كلمة المرور",
 					confirmPasswordPlaceholder: "••••••••",
-					registerButton: "تسجيل",
+					registerButton: "تسجيل حساب",
+					loginHint: "لديك حساب؟",
+					loginLink: "سجل دخول",
 					autoName: "أحمد علي حسن",
 					autoMajor: "علوم حاسوب",
 				},
@@ -330,7 +337,9 @@
 					passwordPlaceholder: "••••••••",
 					labelConfirmPassword: "Confirm Password",
 					confirmPasswordPlaceholder: "••••••••",
-					registerButton: "Register",
+					registerButton: "Register Account",
+					loginHint: "Already have an account?",
+					loginLink: "Login",
 					autoName: "Ahmed Ali Hassan",
 					autoMajor: "Computer Science",
 				},
@@ -358,6 +367,9 @@
 				labelConfirmPassword: document.getElementById("labelConfirmPassword"),
 				confirmPassword: document.getElementById("confirmPassword"),
 				registerButton: document.getElementById("registerButton"),
+				loginHint: document.getElementById("loginHint"),
+				loginHintText: document.getElementById("loginHintText"),
+				loginLink: document.getElementById("loginLink"),
 			};
 
 			function updateLanguageButtons() {
@@ -404,6 +416,8 @@
 				el.labelConfirmPassword.textContent = t.labelConfirmPassword;
 				el.confirmPassword.placeholder = t.confirmPasswordPlaceholder;
 				el.registerButton.textContent = t.registerButton;
+				el.loginHintText.textContent = t.loginHint;
+				el.loginLink.textContent = t.loginLink;
 
 				const isValidId = /^\d{6}$/.test(el.studentId.value);
 				if (isValidId) {
@@ -448,6 +462,10 @@
 			el.langEn.addEventListener("click", () => applyLanguage("en"));
 
 			applyLanguage("ar");
+
+			if (window.lucide) {
+				window.lucide.createIcons();
+			}
 		</script>
 	</body>
 </html>
