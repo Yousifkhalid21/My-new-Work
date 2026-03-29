@@ -83,12 +83,6 @@
 				box-shadow: 0 28px 60px rgba(31, 41, 55, 0.18);
 			}
 
-			.major-active {
-				background: linear-gradient(145deg, rgba(147, 51, 234, 0.16), rgba(99, 102, 241, 0.12));
-				border-color: rgba(147, 51, 234, 0.45);
-				box-shadow: 0 0 0 1px rgba(147, 51, 234, 0.2), 0 22px 48px rgba(99, 102, 241, 0.2);
-			}
-
 			.track-tab-active {
 				background: linear-gradient(120deg, #9333ea 0%, #6366f1 100%);
 				color: #ffffff;
@@ -106,6 +100,11 @@
 				min-width: 220px;
 			}
 
+			.day-header {
+				background: linear-gradient(120deg, rgba(99, 102, 241, 0.12), rgba(147, 51, 234, 0.08));
+				border: 1px solid rgba(99, 102, 241, 0.2);
+			}
+
 			.subject-block {
 				border-radius: 1rem;
 				padding: 0.95rem;
@@ -116,10 +115,24 @@
 
 			.subject-shared {
 				border-inline-start: 4px solid #6366f1;
+				background: linear-gradient(155deg, rgba(238, 242, 255, 0.95), rgba(255, 255, 255, 0.9));
 			}
 
 			.subject-major {
 				border-inline-start: 4px solid #0ea5e9;
+				background: linear-gradient(155deg, rgba(236, 254, 255, 0.9), rgba(255, 255, 255, 0.9));
+			}
+
+			.meta-chip {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				padding: 0.2rem 0.55rem;
+				border-radius: 999px;
+				font-size: 0.7rem;
+				font-weight: 700;
+				background: rgba(255, 255, 255, 0.72);
+				border: 1px solid rgba(148, 163, 184, 0.25);
 			}
 
 			@media (max-width: 900px) {
@@ -168,7 +181,7 @@
 						<button data-track="stats" class="track-tab rounded-2xl border border-accentIndigo/25 bg-white px-4 py-2.5 text-sm font-semibold text-darkGray transition">الإحصاء</button>
 						<button data-track="joint" class="track-tab rounded-2xl border border-accentIndigo/25 bg-white px-4 py-2.5 text-sm font-semibold text-darkGray transition">مشترك</button>
 					</div>
-					<p id="trackHint" class="mt-4 text-sm text-darkGray/65">يعرض الجدول المواد المشتركة مع مواد التخصص المحدد تلقائياً.</p>
+					<p id="trackHint" class="mt-4 text-sm text-darkGray/65">اختر المسار لعرض محاضراته فقط بشكل يومي واضح وسريع.</p>
 				</section>
 
 				<section class="reveal d3 schedule-card rounded-3xl p-5 shadow-soft-2xl sm:p-7">
@@ -191,8 +204,10 @@
 					pageSubtitle: "اختر مسارك لعرض الجدول الأسبوعي (الإثنين - الخميس)",
 					majorTitle: "مرشح المسار - الفصل السابع",
 					subjectsTitle: "الجدول الأسبوعي",
-					trackHint: "يعرض الجدول المواد المشتركة مع مواد التخصص المحدد تلقائياً.",
+					trackHint: "اختر المسار لعرض محاضراته فقط بشكل يومي واضح وسريع.",
 					activeTrack: "المسار الحالي:",
+					hallLabel: "القاعة",
+					emptyDay: "لا توجد محاضرات في هذا اليوم.",
 					days: {
 						mon: "الإثنين",
 						tue: "الثلاثاء",
@@ -216,8 +231,10 @@
 					pageSubtitle: "Select your track to see the weekly timetable (Mon - Thu)",
 					majorTitle: "Semester 7 Track Filter",
 					subjectsTitle: "Weekly Timetable",
-					trackHint: "The table automatically shows Joint courses plus your selected specialization.",
+					trackHint: "Pick a tab to view only that track in a clean daily schedule.",
 					activeTrack: "Active track:",
+					hallLabel: "Hall",
+					emptyDay: "No classes on this day.",
 					days: {
 						mon: "Monday",
 						tue: "Tuesday",
@@ -236,28 +253,28 @@
 			};
 
 			const semesterData = {
-				joint: [
-					{ ar: "الذكاء الاصطناعي والنظم الخبيرة", en: "AI & Expert Systems", day: "mon", time: "08:30 - 10:00", type: "joint" },
-					{ ar: "أساسيات هندسة البرمجيات", en: "Software Engineering", day: "tue", time: "10:30 - 12:00", type: "joint" },
-					{ ar: "تحليل السلاسل الزمنية", en: "Time Series Analysis", day: "thu", time: "09:00 - 10:30", type: "joint" },
-				],
 				cs: [
-					{ ar: "تفاعل الإنسان والحاسوب", en: "HCI", day: "mon", time: "12:30 - 14:00", type: "major" },
-					{ ar: "البرمجة الموجهة بالأشياء", en: "OOP", day: "tue", time: "08:30 - 10:00", type: "major" },
-					{ ar: "شبكات الحاسوب والانترنت", en: "Computer Networks", day: "wed", time: "10:30 - 12:00", type: "major" },
-					{ ar: "نظم المعلومات الإدارية", en: "MIS", day: "thu", time: "12:30 - 14:00", type: "major" },
+					{ ar: "تفاعل الإنسان والحاسوب", en: "Human-Computer Interaction", day: "mon", time: "10:00 - 12:00", hall: "B2-117", type: "major", start: 1000 },
+					{ ar: "البرمجة الموجهة بالأشياء", en: "Object-Oriented Programming", day: "mon", time: "12:00 - 02:00", hall: "B2-117", type: "major", start: 1200 },
+					{ ar: "شبكات الحاسوب والإنترنت", en: "Computer Networks and Internet", day: "wed", time: "12:00 - 02:00", hall: "B2-116", type: "major", start: 1200 },
+					{ ar: "نظم المعلومات الإدارية", en: "Management Information Systems", day: "thu", time: "12:00 - 02:00", hall: "B2116", type: "major", start: 1200 },
 				],
 				math: [
-					{ ar: "نظرية الزمر", en: "Group Theory", day: "mon", time: "12:30 - 14:00", type: "major" },
-					{ ar: "الطرق الرياضية", en: "Math Methods", day: "tue", time: "08:30 - 10:00", type: "major" },
-					{ ar: "التبولوجيا العامة", en: "General Topology", day: "wed", time: "10:30 - 12:00", type: "major" },
-					{ ar: "نظرية الأعداد", en: "Number Theory", day: "thu", time: "12:30 - 14:00", type: "major" },
+					{ ar: "نظرية الزمر", en: "Group Theory", day: "mon", time: "08:00 - 10:00", hall: "B1-104", type: "major", start: 800 },
+					{ ar: "الطرق الرياضية", en: "Mathematical Methods", day: "mon", time: "12:00 - 02:00", hall: "B1-104", type: "major", start: 1200 },
+					{ ar: "التوبولوجيا العامة", en: "General Topology", day: "wed", time: "08:00 - 10:00", hall: "B1-104", type: "major", start: 800 },
+					{ ar: "نظرية الأعداد", en: "Number Theory", day: "wed", time: "12:00 - 02:00", hall: "B1-104", type: "major", start: 1200 },
 				],
 				stats: [
-					{ ar: "أساليب أخذ العينات", en: "Sampling Methods", day: "mon", time: "12:30 - 14:00", type: "major" },
-					{ ar: "الطرق الإحصائية", en: "Statistical Methods", day: "tue", time: "08:30 - 10:00", type: "major" },
-					{ ar: "الاقتصاد القياسي", en: "Econometrics", day: "wed", time: "10:30 - 12:00", type: "major" },
-					{ ar: "العمليات التصادفية", en: "Stochastic Processes", day: "thu", time: "12:30 - 14:00", type: "major" },
+					{ ar: "أساليب أخذ العينات", en: "Sampling Methods", day: "mon", time: "10:00 - 12:00", hall: "B1-103", type: "major", start: 1000 },
+					{ ar: "الطرق الإحصائية", en: "Statistical Methods", day: "wed", time: "08:00 - 10:00", hall: "B2-116", type: "major", start: 800 },
+					{ ar: "الاقتصاد القياسي", en: "Econometrics", day: "wed", time: "10:00 - 12:00", hall: "B1-104", type: "major", start: 1000 },
+					{ ar: "العمليات التصادفية", en: "Stochastic Processes", day: "thu", time: "12:00 - 02:00", hall: "B1-103", type: "major", start: 1200 },
+				],
+				joint: [
+					{ ar: "الذكاء الاصطناعي والنظم الخبيرة", en: "AI and Expert Systems", day: "tue", time: "08:00 - 10:00", hall: "B2-215", type: "joint", start: 800 },
+					{ ar: "أساسيات هندسة البرمجيات", en: "Software Engineering Fundamentals", day: "tue", time: "10:00 - 12:00", hall: "B2-215", type: "joint", start: 1000 },
+					{ ar: "تحليل السلاسل الزمنية", en: "Time Series Analysis", day: "thu", time: "10:00 - 12:00", hall: "B1-103", type: "joint", start: 1000 },
 				],
 			};
 
@@ -289,10 +306,7 @@
 			}
 
 			function getCoursesForTrack() {
-				if (state.selectedTrack === "joint") {
-					return [...semesterData.joint];
-				}
-				return [...semesterData.joint, ...semesterData[state.selectedTrack]];
+				return [...semesterData[state.selectedTrack]].sort((a, b) => a.start - b.start);
 			}
 
 			function renderSchedule() {
@@ -305,7 +319,7 @@
 					const column = document.createElement("article");
 					column.className = "day-column rounded-2xl border border-white/70 bg-white/70 p-4";
 
-					const dayCourses = courses.filter((course) => course.day === day);
+					const dayCourses = courses.filter((course) => course.day === day).sort((a, b) => a.start - b.start);
 					const blocks = dayCourses
 						.map((course) => {
 							const badge = course.type === "joint" ? t.jointBadge : t.majorBadge;
@@ -314,30 +328,39 @@
 								'<div class="subject-block ' +
 								blockClass +
 								'">' +
-								'<p class="text-[11px] font-semibold tracking-wide text-darkGray/60">' +
+								'<div class="flex items-center justify-between gap-2">' +
+								'<span class="meta-chip">' +
 								badge +
-								" | " +
+								"</span>" +
+								'<span class="meta-chip">' +
 								course.time +
-								"</p>" +
+								"</span>" +
+								"</div>" +
 								'<h3 class="mt-1 text-sm font-bold text-darkGray">' +
 								(state.lang === "ar" ? course.ar : course.en) +
 								"</h3>" +
 								(state.lang === "ar"
 									? '<p class="mt-1 text-xs text-darkGray/65">' + course.en + "</p>"
 									: '<p class="mt-1 text-xs text-darkGray/65">' + course.ar + "</p>") +
+								'<div class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-darkGray/75">' +
+								'<i data-lucide="map-pin" class="h-3.5 w-3.5"></i>' +
+								t.hallLabel +
+								": " +
+								course.hall +
+								"</div>" +
 								"</div>"
 							);
 						})
 						.join("");
 
 					column.innerHTML =
-						'<header class="mb-2 flex items-center justify-between border-b border-slate-200/70 pb-2">' +
+						'<header class="day-header mb-2 flex items-center justify-between rounded-xl px-3 py-2">' +
 						'<h3 class="font-display text-base font-bold text-darkGray">' +
 						t.days[day] +
 						"</h3>" +
 						'<i data-lucide="calendar-days" class="h-4 w-4 text-accentIndigo/70"></i>' +
 						"</header>" +
-						(blocks || '<p class="text-sm text-darkGray/60">No lectures</p>');
+						(blocks || '<p class="text-sm text-darkGray/60">' + t.emptyDay + "</p>");
 
 					el.scheduleGrid.appendChild(column);
 				});
