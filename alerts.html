@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>بوابة الطلاب | التنبيهات</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://unpkg.com/lucide@latest"></script>
+		<script>
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						fontFamily: {
+							sans: ["Cairo", "sans-serif"],
+							display: ["Space Grotesk", "sans-serif"],
+						},
+						colors: {
+							accentPurple: "#9333ea",
+							accentIndigo: "#6366f1",
+							darkGray: "#4b5563",
+						},
+						boxShadow: {
+							"soft-lg": "0 10px 25px rgba(0, 0, 0, 0.08)",
+							"soft-xl": "0 15px 35px rgba(0, 0, 0, 0.1)",
+						},
+					},
+				},
+			};
+		</script>
+
+		<style>
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(14px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			body {
+				background: linear-gradient(135deg, #fce7e7 0%, #fef4d4 35%, #ffffff 100%);
+				min-height: 100vh;
+			}
+
+			.reveal {
+				opacity: 0;
+				animation: fadeUp 0.7s ease forwards;
+			}
+
+			.filter-chip {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 9999px;
+				padding: 0.5rem 1rem;
+				font-size: 0.875rem;
+				font-weight: 700;
+				border: 1px solid rgba(147, 51, 234, 0.2);
+				background: rgba(255, 255, 255, 0.75);
+				color: #4b5563;
+				transition: all 0.25s ease;
+			}
+
+			.filter-chip:hover {
+				transform: translateY(-1px);
+				background: rgba(255, 255, 255, 0.95);
+			}
+
+			.filter-chip.active {
+				color: #ffffff;
+				border-color: transparent;
+				background-image: linear-gradient(90deg, #9333ea, #6366f1);
+				box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+			}
+		</style>
+	</head>
+
+	<body class="min-h-screen text-darkGray antialiased selection:bg-accentPurple/20 selection:text-accentPurple">
+		<div class="relative isolate overflow-hidden">
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(248,185,235,0.15),transparent_40%),radial-gradient(circle_at_85%_90%,rgba(165,142,251,0.12),transparent_45%)]"></div>
+
+			<header class="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
+				<nav class="reveal flex items-center justify-between rounded-2xl border border-white/60 bg-white/70 px-4 py-3 backdrop-blur-md shadow-soft-lg sm:px-6">
+					<div class="leading-tight">
+						<p class="font-display text-sm tracking-wide text-darkGray sm:text-base">Batch 43</p>
+						<p id="facultyText" class="mt-1 text-[11px] font-light tracking-wide text-darkGray/60 sm:text-xs">كلية العلوم الرياضية والحاسوب</p>
+					</div>
+					<div class="flex items-center gap-2 sm:gap-3">
+						<a id="backButton" href="dashboard.html" class="inline-flex items-center gap-2 rounded-xl border border-accentIndigo/30 bg-white/85 px-3 py-2 text-xs font-semibold text-accentIndigo transition hover:bg-accentIndigo/10 sm:text-sm" title="العودة إلى لوحة التحكم">
+							<i data-lucide="arrow-left" class="h-4 w-4"></i>
+							<span id="backText">العودة إلى لوحة التحكم</span>
+						</a>
+						<div class="flex items-center gap-1 rounded-full border border-accentPurple/20 bg-purple-100/40 px-1 py-1 text-xs backdrop-blur-sm">
+							<button type="button" id="langAr" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">AR</button>
+							<button type="button" id="langEn" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">EN</button>
+						</div>
+					</div>
+				</nav>
+			</header>
+
+			<main class="mx-auto w-full max-w-6xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
+				<section class="reveal rounded-3xl border border-white/70 bg-white/90 p-4 shadow-soft-xl backdrop-blur-3xl sm:p-6">
+					<div class="flex flex-wrap items-center gap-2 sm:gap-3">
+						<button type="button" id="filterAll" class="filter-chip active">الكل</button>
+						<button type="button" id="filterAcademic" class="filter-chip">أكاديمي</button>
+						<button type="button" id="filterAdmin" class="filter-chip">إداري</button>
+						<button type="button" id="filterActivities" class="filter-chip">نشاطات</button>
+					</div>
+				</section>
+
+				<section class="reveal mt-6 rounded-3xl border border-white/70 bg-white/90 p-7 shadow-soft-xl backdrop-blur-3xl sm:p-10">
+					<div class="mx-auto flex min-h-[300px] max-w-2xl flex-col items-center justify-center text-center">
+						<div class="grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-violet-100 to-cyan-100 ring-8 ring-white/70 shadow-soft-lg">
+							<i data-lucide="bell-ring" class="h-12 w-12 text-violet-600"></i>
+						</div>
+						<h1 id="emptyTitle" class="mt-6 font-display text-3xl font-bold text-darkGray sm:text-4xl">لا توجد تنبيهات حالياً</h1>
+						<p id="emptyDesc" class="mt-4 max-w-xl leading-8 text-darkGray/75">سيظهر هنا كل ما هو جديد بخصوص الدفعة 43 من إعلانات رسمية ونشاطات.</p>
+					</div>
+				</section>
+
+				<section class="reveal mt-6 rounded-3xl border border-amber-200/70 bg-white/85 p-5 shadow-soft-lg backdrop-blur-2xl">
+					<p id="adminPlaceholder" class="text-sm font-semibold text-amber-700">[خاص بالمشرف] سيتم إضافة نموذج إرسال التنبيهات هنا لاحقاً</p>
+				</section>
+			</main>
+		</div>
+
+		<script>
+			const filterButtons = [];
+
+			const i18n = {
+				ar: {
+					title: "بوابة الطلاب | التنبيهات",
+					faculty: "كلية العلوم الرياضية والحاسوب",
+					backText: "العودة إلى لوحة التحكم",
+					backTooltip: "العودة إلى لوحة التحكم",
+					filterAll: "الكل",
+					filterAcademic: "أكاديمي",
+					filterAdmin: "إداري",
+					filterActivities: "نشاطات",
+					emptyTitle: "لا توجد تنبيهات حالياً",
+					emptyDesc: "سيظهر هنا كل ما هو جديد بخصوص الدفعة 43 من إعلانات رسمية ونشاطات.",
+					adminPlaceholder: "[خاص بالمشرف] سيتم إضافة نموذج إرسال التنبيهات هنا لاحقاً",
+					filtersAria: "فلاتر التنبيهات",
+					backText: "العودة إلى لوحة التحكم",
+				},
+				en: {
+					title: "Student Portal | Alerts",
+					faculty: "Faculty of Mathematical Sciences and Computing",
+					backText: "Back to Dashboard",
+					backTooltip: "Back to Dashboard",
+					filterAll: "All",
+					filterAcademic: "Academic",
+					filterAdmin: "Administrative",
+					filterActivities: "Activities",
+					emptyTitle: "No alerts currently",
+					emptyDesc: "All new official announcements and activities for Batch 43 will appear here.",
+					adminPlaceholder: "[Admin only] Alert submission form will be added here later.",
+					filtersAria: "Alert filters",
+					backText: "Back to Dashboard",
+				},
+			};
+
+			const el = {
+				langAr: document.getElementById("langAr"),
+				langEn: document.getElementById("langEn"),
+				facultyText: document.getElementById("facultyText"),
+				backButton: document.getElementById("backButton"),
+				filterAll: document.getElementById("filterAll"),
+				filterAcademic: document.getElementById("filterAcademic"),
+				filterAdmin: document.getElementById("filterAdmin"),
+				filterActivities: document.getElementById("filterActivities"),
+				emptyTitle: document.getElementById("emptyTitle"),
+				emptyDesc: document.getElementById("emptyDesc"),
+				adminPlaceholder: document.getElementById("adminPlaceholder"),
+				backText: document.getElementById("backText"),
+			};
+
+			let currentLang = "ar";
+
+			function updateLanguageButtons() {
+				const activeClass = "bg-gradient-to-r from-accentPurple to-accentIndigo text-white shadow-soft-lg";
+				const inactiveClass = "text-darkGray/70";
+				el.langAr.className = "rounded-full px-3 py-1.5 font-semibold transition duration-300 " + (currentLang === "ar" ? activeClass : inactiveClass);
+				el.langEn.className = "rounded-full px-3 py-1.5 font-semibold transition duration-300 " + (currentLang === "en" ? activeClass : inactiveClass);
+			}
+
+			function setActiveFilter(activeButton) {
+				filterButtons.forEach((btn) => {
+					btn.classList.remove("active");
+					btn.setAttribute("aria-pressed", "false");
+				});
+				activeButton.classList.add("active");
+				activeButton.setAttribute("aria-pressed", "true");
+			}
+
+			function applyLanguage(lang) {
+				currentLang = lang;
+				const t = i18n[lang];
+				document.documentElement.lang = lang;
+				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+				document.title = t.title;
+				el.facultyText.textContent = t.faculty;
+				el.backButton.title = t.backTooltip;
+				el.filterAll.textContent = t.filterAll;
+				el.filterAcademic.textContent = t.filterAcademic;
+				el.filterAdmin.textContent = t.filterAdmin;
+				el.filterActivities.textContent = t.filterActivities;
+				el.filterAll.setAttribute("aria-label", t.filtersAria + ": " + t.filterAll);
+				el.filterAcademic.setAttribute("aria-label", t.filtersAria + ": " + t.filterAcademic);
+				el.filterAdmin.setAttribute("aria-label", t.filtersAria + ": " + t.filterAdmin);
+				el.filterActivities.setAttribute("aria-label", t.filtersAria + ": " + t.filterActivities);
+				el.emptyTitle.textContent = t.emptyTitle;
+				el.emptyDesc.textContent = t.emptyDesc;
+				el.adminPlaceholder.textContent = t.adminPlaceholder;
+				el.backText.textContent = t.backText;
+				updateLanguageButtons();
+			}
+
+			filterButtons.push(el.filterAll, el.filterAcademic, el.filterAdmin, el.filterActivities);
+			filterButtons.forEach((btn) => {
+				btn.addEventListener("click", () => setActiveFilter(btn));
+			});
+
+			el.langAr.addEventListener("click", () => applyLanguage("ar"));
+			el.langEn.addEventListener("click", () => applyLanguage("en"));
+			if (window.lucide) {
+				window.lucide.createIcons();
+			}
+			applyLanguage("ar");
+		</script>
+	</body>
+</html>

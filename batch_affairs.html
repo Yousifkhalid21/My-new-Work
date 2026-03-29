@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="light">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>بوابة الطلاب | شؤون الدفعة</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://unpkg.com/lucide@latest"></script>
+		<script>
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						fontFamily: {
+							sans: ["Cairo", "sans-serif"],
+							display: ["Space Grotesk", "sans-serif"],
+						},
+						colors: {
+							accentPurple: "#9333ea",
+							accentIndigo: "#6366f1",
+							darkGray: "#4b5563",
+						},
+						boxShadow: {
+							"soft-lg": "0 10px 25px rgba(0, 0, 0, 0.08)",
+							"soft-xl": "0 15px 35px rgba(0, 0, 0, 0.1)",
+							"soft-2xl": "0 25px 65px rgba(31, 41, 55, 0.18)",
+						},
+					},
+				},
+			};
+		</script>
+
+		<style>
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(14px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes modalSlideUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px) scale(0.95);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0) scale(1);
+				}
+			}
+
+			@keyframes backdropFade {
+				from {
+					opacity: 0;
+					backdrop-filter: blur(0px);
+				}
+				to {
+					opacity: 1;
+					backdrop-filter: blur(12px);
+				}
+			}
+
+			body {
+				background: linear-gradient(135deg, #fce7e7 0%, #fef4d4 35%, #ffffff 100%);
+				min-height: 100vh;
+			}
+
+			.reveal {
+				opacity: 0;
+				animation: fadeUp 0.7s ease forwards;
+			}
+
+			.modal-backdrop {
+				animation: backdropFade 0.3s ease forwards;
+			}
+
+			.modal-content {
+				animation: modalSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+			}
+
+			.modal-hidden {
+				opacity: 0;
+				pointer-events: none;
+			}
+
+			.modal-hidden .modal-backdrop {
+				animation: none;
+				backdrop-filter: blur(0px);
+			}
+
+			.modal-hidden .modal-content {
+				animation: none;
+				transform: translateY(20px) scale(0.95);
+			}
+		</style>
+	</head>
+
+	<body class="min-h-screen text-darkGray antialiased selection:bg-accentPurple/20 selection:text-accentPurple">
+		<div class="relative isolate overflow-hidden">
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(248,185,235,0.15),transparent_40%),radial-gradient(circle_at_85%_90%,rgba(165,142,251,0.12),transparent_45%)]"></div>
+
+			<header class="mx-auto w-full max-w-7xl px-5 pt-6 sm:px-8">
+				<nav class="reveal flex items-center justify-between rounded-2xl border border-white/60 bg-white/70 px-4 py-3 backdrop-blur-md shadow-soft-lg sm:px-6">
+					<div class="leading-tight">
+						<p class="font-display text-sm tracking-wide text-darkGray sm:text-base">Batch 43</p>
+						<p id="facultyText" class="mt-1 text-[11px] font-light tracking-wide text-darkGray/60 sm:text-xs">كلية العلوم الرياضية والحاسوب</p>
+					</div>
+					<div class="flex items-center gap-2 sm:gap-3">
+						<a id="backButton" href="dashboard.html" class="inline-flex items-center gap-2 rounded-xl border border-accentIndigo/30 bg-white/85 px-3 py-2 text-xs font-semibold text-accentIndigo transition hover:bg-accentIndigo/10 sm:text-sm" title="العودة إلى لوحة التحكم">
+							<i data-lucide="arrow-left" class="h-4 w-4"></i>
+							<span id="backText">العودة إلى لوحة التحكم</span>
+						</a>
+						<div class="flex items-center gap-1 rounded-full border border-accentPurple/20 bg-purple-100/40 px-1 py-1 text-xs backdrop-blur-sm">
+							<button type="button" id="langAr" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">AR</button>
+							<button type="button" id="langEn" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">EN</button>
+						</div>
+					</div>
+				</nav>
+			</header>
+
+			<main class="mx-auto w-full max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
+				<section class="reveal rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl sm:p-8">
+					<h1 class="flex items-center gap-3 font-display text-2xl font-bold text-darkGray sm:text-3xl">
+						<i data-lucide="users-round" class="h-8 w-8 text-violet-500"></i>
+						<span id="familyTitle">أسرة الدفعة</span>
+					</h1>
+
+					<div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+						<!-- Academic Office -->
+						<a href="#" class="rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-soft-lg transition duration-300 ease-out hover:scale-105 hover:shadow-soft-xl cursor-pointer flex flex-col items-center justify-center gap-3">
+							<i data-lucide="book-open" class="h-6 w-6 text-sky-500"></i>
+							<p id="office1Title" class="font-semibold text-center text-darkGray">المكتب الأكاديمي</p>
+						</a>
+
+						<!-- Social Office -->
+						<a href="#" class="rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-soft-lg transition duration-300 ease-out hover:scale-105 hover:shadow-soft-xl cursor-pointer flex flex-col items-center justify-center gap-3">
+							<i data-lucide="users" class="h-6 w-6 text-emerald-500"></i>
+							<p id="office2Title" class="font-semibold text-center text-darkGray">المكتب الاجتماعي</p>
+						</a>
+
+						<!-- Cultural Office -->
+						<a href="#" class="rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-soft-lg transition duration-300 ease-out hover:scale-105 hover:shadow-soft-xl cursor-pointer flex flex-col items-center justify-center gap-3">
+							<i data-lucide="mic" class="h-6 w-6 text-fuchsia-500"></i>
+							<p id="office3Title" class="font-semibold text-center text-darkGray">المكتب الثقافي</p>
+						</a>
+
+						<!-- Sports Office -->
+						<a href="#" class="rounded-2xl border border-slate-200/80 bg-white/80 p-6 shadow-soft-lg transition duration-300 ease-out hover:scale-105 hover:shadow-soft-xl cursor-pointer flex flex-col items-center justify-center gap-3">
+							<i data-lucide="trophy" class="h-6 w-6 text-amber-500"></i>
+							<p id="office4Title" class="font-semibold text-center text-darkGray">المكتب الرياضي</p>
+						</a>
+					</div>
+				</section>
+
+				<section class="reveal mt-6 rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl sm:p-8">
+					<h2 class="flex items-center gap-3 font-display text-2xl font-bold text-darkGray sm:text-3xl">
+						<i data-lucide="wallet" class="h-8 w-8 text-violet-500"></i>
+						<span id="treasuryTitle">خزينة الدفعة</span>
+					</h2>
+
+					<!-- Current Balance Section -->
+					<div class="mt-5 rounded-2xl border border-violet-100 bg-violet-50/65 p-8">
+						<div class="flex flex-col items-center justify-center">
+							<div class="flex items-center gap-2 mb-6">
+								<i data-lucide="wallet" class="h-5 w-5 text-violet-400"></i>
+								<p id="balanceLabel" class="text-xs font-normal text-slate-500 uppercase tracking-wider">الرصيد الحالي</p>
+							</div>
+							<div class="text-center">
+								<div>
+									<span id="balanceValueAmount" class="text-3xl sm:text-4xl font-normal text-slate-600">0.00</span>
+								</div>
+								<div id="balanceValueCurrency" class="text-lg sm:text-xl font-normal text-slate-500 mt-2">جنيه سوداني</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Digital Donation Methods Section -->
+					<div class="mt-6 rounded-2xl border border-emerald-100 bg-emerald-50/40 p-5">
+						<h3 class="flex items-center gap-2 text-lg font-semibold text-darkGray">
+							<i data-lucide="send" class="h-5 w-5 text-emerald-600"></i>
+							<span id="donationMethodsTitle">طرق التبرع الرقمية</span>
+						</h3>
+
+						<!-- OKash Integration -->
+						<div class="mt-4 rounded-lg border border-emerald-200/60 bg-white/70 p-4">
+							<div class="flex items-center justify-between">
+								<div class="flex items-center gap-3">
+									<div class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-orange-400 to-orange-600 text-white font-bold text-sm">OK</div>
+									<div>
+										<p id="okashLabel" class="font-semibold text-darkGray">تبرع عبر رقم أوكاش</p>
+										<p class="mt-1 flex items-center gap-2">
+											<code class="text-sm font-mono bg-gray-100 px-2 py-1 rounded text-darkGray font-semibold">[010XXXXXXXX]</code>
+											<button type="button" class="copy-btn" data-text="[010XXXXXXXX]" title="نسخ">
+												<i data-lucide="copy" class="h-4 w-4 text-emerald-600 cursor-pointer hover:text-emerald-700 transition"></i>
+											</button>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Bankak Integration -->
+						<div class="mt-3 rounded-lg border border-emerald-200/60 bg-white/70 p-4">
+							<div class="flex items-center justify-between">
+								<div class="flex items-center gap-3">
+									<div class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 text-white font-bold text-sm">🏦</div>
+									<div>
+										<p id="bankakLabel" class="font-semibold text-darkGray">تبرع عبر رقم بنكك</p>
+										<p class="mt-1 flex items-center gap-2">
+											<code class="text-sm font-mono bg-gray-100 px-2 py-1 rounded text-darkGray font-semibold">[012XXXXXXXX]</code>
+											<button type="button" class="copy-btn" data-text="[012XXXXXXXX]" title="نسخ">
+												<i data-lucide="copy" class="h-4 w-4 text-emerald-600 cursor-pointer hover:text-emerald-700 transition"></i>
+											</button>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Transactions Table -->
+					<div class="mt-6 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/85">
+						<div class="overflow-x-auto">
+							<table class="min-w-full text-sm">
+								<thead class="bg-slate-50 text-darkGray/70">
+									<tr>
+										<th id="thDesc" class="px-4 py-3 text-start font-semibold">وصف المصروف</th>
+										<th id="thAmount" class="px-4 py-3 text-start font-semibold">المبلغ</th>
+										<th id="thDate" class="px-4 py-3 text-start font-semibold">التاريخ</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-slate-200/80 text-darkGray/85">
+									<tr>
+										<td colspan="3" class="px-4 py-8 text-center text-darkGray/60">
+											<div class="flex flex-col items-center gap-2">
+												<i data-lucide="inbox" class="h-8 w-8 text-gray-300"></i>
+												<span id="emptyTransactionsText">لا توجد حركات مالية مسجلة حالياً</span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Contact Treasurer Button -->
+					<div class="mt-5">
+						<button type="button" id="treasurerButton" class="inline-flex items-center gap-2 rounded-xl border border-violet-300/50 bg-violet-50 px-4 py-2 text-sm font-semibold text-violet-700 transition hover:bg-violet-100" title="تواصل مع المسؤول المالي">
+							<i data-lucide="message-circle" class="h-4 w-4"></i>
+							<span id="treasurerText">تواصل مع المسؤول المالي</span>
+						</button>
+					</div>
+				</section>
+			</main>
+
+			<!-- Glassmorphism Modal for Contacting Financial Officer -->
+			<div id="treasurerModal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center px-4">
+				<!-- Backdrop -->
+				<div class="modal-backdrop absolute inset-0 bg-black/30"></div>
+
+				<!-- Modal Content -->
+				<div class="modal-content relative w-full max-w-md rounded-3xl border border-white/70 bg-white/70 p-6 shadow-soft-2xl backdrop-blur-md sm:p-8">
+					<!-- Close Button - Fixed in top-left corner (RTL aware) -->
+					<button
+						type="button"
+						id="closeModalBtn"
+						class="absolute top-4 left-4 sm:top-6 sm:left-6 inline-flex items-center justify-center h-10 w-10 rounded-full bg-white/50 text-darkGray/70 transition hover:bg-white/80 hover:text-darkGray"
+						title="إغلاق"
+					>
+						<i data-lucide="x" class="h-5 w-5"></i>
+					</button>
+
+					<!-- Header with Centered Title -->
+					<div class="pt-4 pb-2 text-center">
+						<p id="modalTitle" class="font-display text-2xl font-bold text-darkGray">المسؤول المالي - الدفعة 43</p>
+						<p id="modalSubtitle" class="mt-2 text-sm text-darkGray/60">اختر طريقة التواصل المفضلة لديك</p>
+					</div>
+
+					<!-- Divider -->
+					<div class="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent my-6"></div>
+
+					<!-- Contact Options with Top Padding -->
+					<div class="space-y-3 pt-4">
+						<!-- WhatsApp Button -->
+						<button
+							type="button"
+							id="whatsappBtn"
+							class="w-full flex items-center gap-3 rounded-2xl border border-emerald-200/60 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 p-4 transition hover:border-emerald-300/80 hover:shadow-lg hover:from-emerald-100 hover:to-teal-100"
+							title="مراسلة عبر واتساب"
+						>
+							<div class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-600 text-white font-bold flex-shrink-0">
+								<i data-lucide="message-square" class="h-5 w-5"></i>
+							</div>
+							<span id="whatsappText" class="font-semibold text-darkGray">مراسلة عبر واتساب</span>
+						</button>
+
+						<!-- Direct Call Button -->
+						<button
+							type="button"
+							id="callBtn"
+							class="w-full flex items-center gap-3 rounded-2xl border border-sky-200/60 bg-gradient-to-r from-sky-50/80 to-blue-50/80 p-4 transition hover:border-sky-300/80 hover:shadow-lg hover:from-sky-100 hover:to-blue-100"
+							title="اتصال هاتفي"
+						>
+							<div class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 text-white font-bold flex-shrink-0">
+								<i data-lucide="phone" class="h-5 w-5"></i>
+							</div>
+							<div class="text-left">
+								<span id="callText" class="font-semibold text-darkGray block">اتصال هاتفي</span>
+								<code class="text-xs text-darkGray/60 font-mono">[01XXXXXXXX]</code>
+							</div>
+						</button>
+
+						<!-- Live Chat Button -->
+						<button
+							type="button"
+							id="chatBtn"
+							class="w-full flex items-center gap-3 rounded-2xl border border-violet-200/60 bg-gradient-to-r from-violet-50/80 to-purple-50/80 p-4 transition hover:border-violet-300/80 hover:shadow-lg hover:from-violet-100 hover:to-purple-100"
+							title="دردشة فورية"
+						>
+							<div class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gradient-to-br from-accentPurple to-violet-600 text-white font-bold flex-shrink-0">
+								<i data-lucide="zap" class="h-5 w-5"></i>
+							</div>
+							<span id="chatText" class="font-semibold text-darkGray">دردشة فورية داخل الموقع</span>
+						</button>
+					</div>
+
+					<!-- Footer Note -->
+					<p id="modalNote" class="mt-8 text-xs text-darkGray/50 text-center">يتم الرد على جميع الاستفسارات خلال 24 ساعة</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const i18n = {
+				ar: {
+					title: "بوابة الطلاب | شؤون الدفعة",
+					faculty: "كلية العلوم الرياضية والحاسوب",
+					backText: "العودة إلى لوحة التحكم",
+					backTooltip: "العودة إلى لوحة التحكم",
+					familyTitle: "أسرة الدفعة",
+					office1Title: "المكتب الأكاديمي",
+					office2Title: "المكتب الاجتماعي",
+					office3Title: "المكتب الثقافي",
+					office4Title: "المكتب الرياضي",
+					treasuryTitle: "خزينة الدفعة",
+					balanceLabel: "الرصيد الحالي",
+					balanceValue: "0.00 جنيه سوداني",
+					donationMethodsTitle: "طرق التبرع الرقمية",
+					okashLabel: "تبرع عبر رقم أوكاش",
+					bankakLabel: "تبرع عبر رقم بنكك",
+					thDesc: "وصف المصروف",
+					thAmount: "المبلغ",
+					thDate: "التاريخ",
+					emptyTransactionsText: "لا توجد حركات مالية مسجلة حالياً",
+					treasurerText: "تواصل مع المسؤول المالي",
+					treasurerTooltip: "تواصل مع المسؤول المالي",
+					modalTitle: "المسؤول المالي - الدفعة 43",
+					modalSubtitle: "اختر طريقة التواصل المفضلة لديك",
+					whatsappText: "مراسلة عبر واتساب",
+					callText: "اتصال هاتفي",
+					chatText: "دردشة فورية داخل الموقع",
+					modalNote: "يتم الرد على جميع الاستفسارات خلال 24 ساعة",
+				},
+				en: {
+					title: "Student Portal | Batch Affairs",
+					faculty: "Faculty of Mathematical Sciences and Computing",
+					backText: "Back to Dashboard",
+					backTooltip: "Back to Dashboard",
+					familyTitle: "Batch Family",
+					office1Title: "Academic Office",
+					office2Title: "Social Office",
+					office3Title: "Cultural Office",
+					office4Title: "Sports Office",
+					treasuryTitle: "Batch Treasury",
+					balanceLabel: "Current Balance",
+					balanceValue: "0.00 Sudanese Pounds",
+					donationMethodsTitle: "Digital Donation Methods",
+					okashLabel: "Donate via OKash Number",
+					bankakLabel: "Donate via Bankak Number",
+					thDesc: "Description",
+					thAmount: "Amount",
+					thDate: "Date",
+					emptyTransactionsText: "No financial transactions recorded yet",
+					treasurerText: "Contact Treasurer",
+					treasurerTooltip: "Contact Treasurer",
+					modalTitle: "Financial Officer - Batch 43",
+					modalSubtitle: "Choose your preferred contact method",
+					whatsappText: "Message via WhatsApp",
+					callText: "Direct Call",
+					chatText: "Live Chat on the Website",
+					modalNote: "All inquiries will be answered within 24 hours",
+				},
+			};
+
+			const el = {
+				langAr: document.getElementById("langAr"),
+				langEn: document.getElementById("langEn"),
+				facultyText: document.getElementById("facultyText"),
+				backButton: document.getElementById("backButton"),
+				backText: document.getElementById("backText"),
+				familyTitle: document.getElementById("familyTitle"),
+				office1Title: document.getElementById("office1Title"),
+				office2Title: document.getElementById("office2Title"),
+				office3Title: document.getElementById("office3Title"),
+				office4Title: document.getElementById("office4Title"),
+				treasuryTitle: document.getElementById("treasuryTitle"),
+				balanceLabel: document.getElementById("balanceLabel"),
+				balanceValueAmount: document.getElementById("balanceValueAmount"),
+				balanceValueCurrency: document.getElementById("balanceValueCurrency"),
+				donationMethodsTitle: document.getElementById("donationMethodsTitle"),
+				okashLabel: document.getElementById("okashLabel"),
+				bankakLabel: document.getElementById("bankakLabel"),
+				thDesc: document.getElementById("thDesc"),
+				thAmount: document.getElementById("thAmount"),
+				thDate: document.getElementById("thDate"),
+				emptyTransactionsText: document.getElementById("emptyTransactionsText"),
+				treasurerButton: document.getElementById("treasurerButton"),
+				treasurerText: document.getElementById("treasurerText"),
+				treasurerModal: document.getElementById("treasurerModal"),
+				closeModalBtn: document.getElementById("closeModalBtn"),
+				modalTitle: document.getElementById("modalTitle"),
+				modalSubtitle: document.getElementById("modalSubtitle"),
+				whatsappBtn: document.getElementById("whatsappBtn"),
+				whatsappText: document.getElementById("whatsappText"),
+				callBtn: document.getElementById("callBtn"),
+				callText: document.getElementById("callText"),
+				chatBtn: document.getElementById("chatBtn"),
+				chatText: document.getElementById("chatText"),
+				modalNote: document.getElementById("modalNote"),
+			};
+
+			let currentLang = "ar";
+
+			function updateLanguageButtons() {
+				const activeClass = "bg-gradient-to-r from-accentPurple to-accentIndigo text-white shadow-soft-lg";
+				const inactiveClass = "text-darkGray/70";
+				el.langAr.className = "rounded-full px-3 py-1.5 font-semibold transition duration-300 " + (currentLang === "ar" ? activeClass : inactiveClass);
+				el.langEn.className = "rounded-full px-3 py-1.5 font-semibold transition duration-300 " + (currentLang === "en" ? activeClass : inactiveClass);
+			}
+
+			function applyLanguage(lang) {
+				currentLang = lang;
+				const t = i18n[lang];
+				document.documentElement.lang = lang;
+				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+				document.title = t.title;
+				el.facultyText.textContent = t.faculty;
+				el.backText.textContent = t.backText;
+				el.backButton.title = t.backTooltip;
+				el.familyTitle.textContent = t.familyTitle;
+				el.office1Title.textContent = t.office1Title;
+				el.office2Title.textContent = t.office2Title;
+				el.office3Title.textContent = t.office3Title;
+				el.office4Title.textContent = t.office4Title;
+				el.treasuryTitle.textContent = t.treasuryTitle;
+				el.balanceLabel.textContent = t.balanceLabel;
+				
+				// Split balance value into amount and currency
+				const balanceValueText = t.balanceValue;
+				const balanceParts = balanceValueText.split(' ');
+				el.balanceValueAmount.textContent = balanceParts[0]; // "0.00"
+				el.balanceValueCurrency.textContent = balanceParts.slice(1).join(' '); // Currency text
+				
+				el.donationMethodsTitle.textContent = t.donationMethodsTitle;
+				el.okashLabel.textContent = t.okashLabel;
+				el.bankakLabel.textContent = t.bankakLabel;
+				el.thDesc.textContent = t.thDesc;
+				el.thAmount.textContent = t.thAmount;
+				el.thDate.textContent = t.thDate;
+				el.emptyTransactionsText.textContent = t.emptyTransactionsText;
+				el.treasurerText.textContent = t.treasurerText;
+				el.treasurerButton.title = t.treasurerTooltip;
+				// Modal translations
+				el.modalTitle.textContent = t.modalTitle;
+				el.modalSubtitle.textContent = t.modalSubtitle;
+				el.whatsappText.textContent = t.whatsappText;
+				el.callText.textContent = t.callText;
+				el.chatText.textContent = t.chatText;
+				el.modalNote.textContent = t.modalNote;
+				updateLanguageButtons();
+			}
+
+			el.langAr.addEventListener("click", () => applyLanguage("ar"));
+			el.langEn.addEventListener("click", () => applyLanguage("en"));
+			
+			// Modal Functions
+			function openTreasurerModal() {
+				el.treasurerModal.classList.remove("modal-hidden");
+				document.body.style.overflow = "hidden";
+			}
+
+			function closeTreasurerModal() {
+				el.treasurerModal.classList.add("modal-hidden");
+				document.body.style.overflow = "";
+			}
+
+			// Modal Event Listeners
+			el.treasurerButton.addEventListener("click", (e) => {
+				e.preventDefault();
+				openTreasurerModal();
+			});
+
+			el.closeModalBtn.addEventListener("click", closeTreasurerModal);
+
+			// Close modal when clicking on backdrop
+			el.treasurerModal.addEventListener("click", (e) => {
+				if (e.target === el.treasurerModal) {
+					closeTreasurerModal();
+				}
+			});
+
+			// Close modal with Escape key
+			document.addEventListener("keydown", (e) => {
+				if (e.key === "Escape" && !el.treasurerModal.classList.contains("modal-hidden")) {
+					closeTreasurerModal();
+				}
+			});
+
+			// Button Actions
+			el.whatsappBtn.addEventListener("click", () => {
+				window.open("https://wa.me/249XXXXXXXXX", "_blank");
+			});
+
+			el.callBtn.addEventListener("click", () => {
+				window.location.href = "tel:+249XXXXXXXXX";
+			});
+
+			el.chatBtn.addEventListener("click", () => {
+				alert("سيتم فتح نافذة الدردشة الفورية قريباً");
+			});
+			
+			// Copy button functionality
+			document.querySelectorAll(".copy-btn").forEach(btn => {
+				btn.addEventListener("click", function() {
+					const text = this.getAttribute("data-text");
+					navigator.clipboard.writeText(text).then(() => {
+						const icon = this.querySelector("i");
+						const originalClass = icon.className;
+						icon.setAttribute("data-lucide", "check");
+						if (window.lucide) {
+							window.lucide.createIcons();
+						}
+						setTimeout(() => {
+							icon.setAttribute("data-lucide", "copy");
+							if (window.lucide) {
+								window.lucide.createIcons();
+							}
+						}, 1500);
+					}).catch(err => console.error("Failed to copy:", err));
+				});
+			});
+			
+			if (window.lucide) {
+				window.lucide.createIcons();
+			}
+			applyLanguage("ar");
+		</script>
+	</body>
+</html>

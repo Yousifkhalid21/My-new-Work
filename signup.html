@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>بوابة الطلاب - التسجيل</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				darkMode: "class",
+				theme: {
+					extend: {
+						fontFamily: {
+							sans: ["Cairo", "sans-serif"],
+							display: ["Space Grotesk", "sans-serif"],
+						},
+						colors: {
+							ink: "#04070f",
+							slateNight: "#0f1628",
+							neonBlue: "#43b3ff",
+							mint: "#3ef2b5",
+						},
+						boxShadow: {
+							glow: "0 0 0 1px rgba(67, 179, 255, 0.35), 0 18px 50px -25px rgba(67, 179, 255, 0.75)",
+							button: "0 0 25px rgba(67, 179, 255, 0.4), 0 10px 30px rgba(62, 242, 181, 0.25)",
+						},
+					},
+				},
+			};
+		</script>
+
+		<style>
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(16px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes pulseGlow {
+				0%,
+				100% {
+					box-shadow: 0 0 18px rgba(67, 179, 255, 0.28);
+				}
+				50% {
+					box-shadow: 0 0 32px rgba(62, 242, 181, 0.3);
+				}
+			}
+
+			.reveal {
+				opacity: 0;
+				animation: fadeUp 0.75s ease forwards;
+			}
+
+			.d1 {
+				animation-delay: 80ms;
+			}
+
+			.d2 {
+				animation-delay: 200ms;
+			}
+
+			.d3 {
+				animation-delay: 340ms;
+			}
+
+			.glow-hover:hover {
+				animation: pulseGlow 1.3s ease-in-out infinite;
+			}
+		</style>
+	</head>
+
+	<body class="min-h-screen bg-ink text-slate-100 antialiased">
+		<div class="relative isolate overflow-hidden">
+			<div
+				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_8%,rgba(62,242,181,0.2),transparent_35%),radial-gradient(circle_at_85%_0%,rgba(67,179,255,0.2),transparent_30%),radial-gradient(circle_at_60%_100%,rgba(70,90,250,0.18),transparent_38%),linear-gradient(165deg,#04070f,#0f1628_46%,#0a0f1d)]"
+			></div>
+			<div
+				class="pointer-events-none absolute left-0 top-20 -z-10 h-60 w-60 rounded-full bg-neonBlue/20 blur-3xl"
+			></div>
+			<div
+				class="pointer-events-none absolute bottom-0 right-0 -z-10 h-60 w-60 rounded-full bg-mint/20 blur-3xl"
+			></div>
+
+			<header class="mx-auto w-full max-w-5xl px-5 pt-6 sm:px-8">
+				<nav
+					class="reveal d1 flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-xl sm:px-6"
+				>
+					<div class="flex items-center gap-3">
+						<span
+							class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-neonBlue to-mint text-ink font-bold"
+							>43</span
+						>
+						<div>
+							<p class="font-display text-sm tracking-wide text-slate-300">Student Portal</p>
+							<p class="text-xs text-slate-400">Batch 43</p>
+						</div>
+					</div>
+
+					<a
+						href="index.html"
+						class="rounded-xl border border-white/15 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-white/40 hover:bg-white/5"
+					>
+						العودة للرئيسية
+					</a>
+				</nav>
+			</header>
+
+			<main class="mx-auto grid w-full max-w-5xl gap-8 px-5 pb-14 pt-10 sm:px-8 lg:grid-cols-2 lg:pt-14">
+				<section class="reveal d2 space-y-6">
+					<p
+						class="inline-flex items-center rounded-full border border-mint/35 bg-mint/10 px-4 py-1 text-xs font-semibold tracking-[0.18em] text-mint"
+					>
+						تسجيل جديد
+					</p>
+					<h1 class="font-display text-4xl leading-tight text-white sm:text-5xl">
+						أنشئ حسابك في بوابة طلاب الدفعة 43
+					</h1>
+					<p class="text-base text-slate-300 sm:text-lg">
+						أدخل رقمك الجامعي لإحضار بياناتك تلقائيًا، ثم أكمل البريد وكلمة المرور لتفعيل
+						حسابك بسرعة.
+					</p>
+					<div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-300">
+						<p class="font-semibold text-white">ملاحظة:</p>
+						<p class="mt-1">يجب أن يكون رقم الطالب مكونًا من 6 أرقام.</p>
+					</div>
+				</section>
+
+				<section class="reveal d3">
+					<form
+						class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/[0.02] p-6 shadow-2xl backdrop-blur"
+						autocomplete="off"
+					>
+						<div class="space-y-4">
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">الرقم الجامعي</span>
+								<div class="relative">
+									<input
+										id="studentId"
+										type="text"
+										inputmode="numeric"
+										maxlength="6"
+										placeholder="مثال: 430123"
+										class="w-full rounded-xl border border-white/15 bg-slateNight/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-neonBlue/60 focus:ring-2 focus:ring-neonBlue/35"
+									/>
+									<span
+										id="idCheck"
+										class="pointer-events-none absolute left-3 top-1/2 hidden -translate-y-1/2 text-lg text-mint"
+										aria-hidden="true"
+									>
+										✔
+									</span>
+								</div>
+							</label>
+
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">الاسم الكامل</span>
+								<input
+									id="fullName"
+									type="text"
+									disabled
+									class="w-full cursor-not-allowed rounded-xl border border-white/10 bg-slateNight/40 px-4 py-3 text-slate-300 outline-none"
+								/>
+							</label>
+
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">التخصص</span>
+								<input
+									id="major"
+									type="text"
+									disabled
+									class="w-full cursor-not-allowed rounded-xl border border-white/10 bg-slateNight/40 px-4 py-3 text-slate-300 outline-none"
+								/>
+							</label>
+
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">البريد الإلكتروني</span>
+								<input
+									type="email"
+									placeholder="name@university.edu"
+									class="w-full rounded-xl border border-white/15 bg-slateNight/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-neonBlue/60 focus:ring-2 focus:ring-neonBlue/35"
+									required
+								/>
+							</label>
+
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">كلمة المرور</span>
+								<input
+									type="password"
+									placeholder="••••••••"
+									class="w-full rounded-xl border border-white/15 bg-slateNight/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-neonBlue/60 focus:ring-2 focus:ring-neonBlue/35"
+									required
+								/>
+							</label>
+
+							<label class="block">
+								<span class="mb-1 block text-sm font-semibold text-slate-200">تأكيد كلمة المرور</span>
+								<input
+									type="password"
+									placeholder="••••••••"
+									class="w-full rounded-xl border border-white/15 bg-slateNight/70 px-4 py-3 text-white outline-none transition placeholder:text-slate-500 focus:border-neonBlue/60 focus:ring-2 focus:ring-neonBlue/35"
+									required
+								/>
+							</label>
+
+							<button
+								type="submit"
+								class="glow-hover w-full rounded-xl bg-gradient-to-r from-neonBlue to-mint px-6 py-3 text-base font-bold text-ink shadow-button transition duration-300 hover:scale-[1.01]"
+							>
+								تسجيل
+							</button>
+						</div>
+					</form>
+				</section>
+			</main>
+		</div>
+
+		<script>
+			const studentIdInput = document.getElementById("studentId");
+			const fullNameInput = document.getElementById("fullName");
+			const majorInput = document.getElementById("major");
+			const idCheck = document.getElementById("idCheck");
+
+			const lockAutoFields = (isLocked) => {
+				fullNameInput.disabled = isLocked;
+				majorInput.disabled = isLocked;
+			};
+
+			studentIdInput.addEventListener("input", (event) => {
+				const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, 6);
+				event.target.value = digitsOnly;
+
+				const validId = /^\d{6}$/.test(digitsOnly);
+
+				if (validId) {
+					idCheck.classList.remove("hidden");
+					fullNameInput.value = "Student Name";
+					majorInput.value = "Computer Science - Batch 43";
+					lockAutoFields(true);
+					return;
+				}
+
+				idCheck.classList.add("hidden");
+				fullNameInput.value = "";
+				majorInput.value = "";
+				lockAutoFields(true);
+			});
+		</script>
+	</body>
+</html>
