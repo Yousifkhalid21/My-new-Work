@@ -181,7 +181,7 @@
 						<button data-track="stats" class="track-tab rounded-2xl border border-accentIndigo/25 bg-white px-4 py-2.5 text-sm font-semibold text-darkGray transition">الإحصاء</button>
 						<button data-track="joint" class="track-tab rounded-2xl border border-accentIndigo/25 bg-white px-4 py-2.5 text-sm font-semibold text-darkGray transition">مشترك</button>
 					</div>
-					<p id="trackHint" class="mt-4 text-sm text-darkGray/65">اختر المسار لعرض محاضراته فقط بشكل يومي واضح وسريع.</p>
+					<p id="trackHint" class="mt-4 text-sm text-darkGray/65">عند اختيار أي تخصص ستظهر مواده مع المواد المشتركة تلقائياً، بينما تبويب مشترك يعرض المشتركة فقط.</p>
 				</section>
 
 				<section class="reveal d3 schedule-card rounded-3xl p-5 shadow-soft-2xl sm:p-7">
@@ -204,7 +204,7 @@
 					pageSubtitle: "اختر مسارك لعرض الجدول الأسبوعي (الإثنين - الخميس)",
 					majorTitle: "مرشح المسار - الفصل السابع",
 					subjectsTitle: "الجدول الأسبوعي",
-					trackHint: "اختر المسار لعرض محاضراته فقط بشكل يومي واضح وسريع.",
+					trackHint: "عند اختيار أي تخصص ستظهر مواده مع المواد المشتركة تلقائياً، بينما تبويب مشترك يعرض المشتركة فقط.",
 					activeTrack: "المسار الحالي:",
 					hallLabel: "القاعة",
 					emptyDay: "لا توجد محاضرات في هذا اليوم.",
@@ -231,7 +231,7 @@
 					pageSubtitle: "Select your track to see the weekly timetable (Mon - Thu)",
 					majorTitle: "Semester 7 Track Filter",
 					subjectsTitle: "Weekly Timetable",
-					trackHint: "Pick a tab to view only that track in a clean daily schedule.",
+					trackHint: "Each major tab shows specialization courses merged with Joint Courses automatically; the Joint tab stays as quick reference.",
 					activeTrack: "Active track:",
 					hallLabel: "Hall",
 					emptyDay: "No classes on this day.",
@@ -306,7 +306,10 @@
 			}
 
 			function getCoursesForTrack() {
-				return [...semesterData[state.selectedTrack]].sort((a, b) => a.start - b.start);
+				if (state.selectedTrack === "joint") {
+					return [...semesterData.joint].sort((a, b) => a.start - b.start);
+				}
+				return [...semesterData[state.selectedTrack], ...semesterData.joint].sort((a, b) => a.start - b.start);
 			}
 
 			function renderSchedule() {
