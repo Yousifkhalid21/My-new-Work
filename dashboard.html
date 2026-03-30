@@ -44,56 +44,39 @@
 		</script>
 
 		<style>
-			@keyframes fadeUp {
-				from {
-					opacity: 0;
-					transform: translateY(18px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
-			@keyframes fillGrade {
-				from {
-					width: 0;
-				}
-				to {
-					width: 65%;
-				}
-			}
-
-			.reveal {
-				opacity: 0;
-				animation: fadeUp 0.85s ease forwards;
-			}
-
-			.d1 {
-				animation-delay: 80ms;
-			}
-			.d2 {
-				animation-delay: 180ms;
-			}
-			.d3 {
-				animation-delay: 280ms;
-			}
-			.d4 {
-				animation-delay: 380ms;
-			}
-
 			body {
-				background: linear-gradient(135deg, #fce7e7 0%, #fef4d4 35%, #ffffff 100%);
+				background: linear-gradient(135deg, #f3e9ff 0%, #ffe5d7 55%, #fff7f1 100%);
 				min-height: 100vh;
 			}
 
+			.glass-card {
+				background: rgba(255, 255, 255, 0.7);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				backdrop-filter: blur(20px);
+			}
+
+			@keyframes haloPulse {
+				0%,
+				100% {
+					box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35), 0 0 18px rgba(191, 219, 254, 0.35);
+				}
+				50% {
+					box-shadow: 0 0 0 6px rgba(255, 255, 255, 0), 0 0 26px rgba(191, 219, 254, 0.45);
+				}
+			}
+
+			.logo-pulse {
+				animation: haloPulse 2.8s ease-in-out infinite;
+			}
+
 			.card-hover {
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
+				transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 			}
 
 			.card-hover:hover {
-				transform: scale(1.05);
-				box-shadow: 0 28px 60px rgba(31, 41, 55, 0.18);
+				transform: translateY(-6px);
+				border-color: rgba(147, 51, 234, 0.55);
+				box-shadow: 0 18px 45px rgba(101, 85, 204, 0.24);
 			}
 		</style>
 	</head>
@@ -102,42 +85,55 @@
 		<div class="relative isolate overflow-hidden">
 			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(248,185,235,0.15),transparent_40%),radial-gradient(circle_at_85%_90%,rgba(165,142,251,0.12),transparent_45%)]"></div>
 
-			<header class="mx-auto w-full max-w-7xl px-5 pt-6 sm:px-8">
-				<nav class="reveal d1 flex items-center justify-between rounded-2xl border border-white/60 bg-white/70 px-4 py-3 backdrop-blur-md shadow-soft-lg sm:px-6">
+			<header class="mx-auto hidden w-full max-w-7xl px-5 pt-6 sm:px-8 md:block">
+				<nav class="glass-card flex items-center justify-between rounded-2xl px-4 py-3 shadow-soft-lg sm:px-6">
 					<p class="font-display text-sm tracking-wide text-darkGray sm:text-base">Batch 43</p>
 					<div class="flex items-center gap-2">
-						<div class="flex items-center gap-1 rounded-full border border-accentPurple/20 bg-purple-100/40 px-1 py-1 text-xs backdrop-blur-sm">
-						<button type="button" id="langAr" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">AR</button>
-						<button type="button" id="langEn" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">EN</button>
+						<div class="flex items-center gap-1 rounded-full border border-white/20 bg-white/60 px-1 py-1 text-xs backdrop-blur-sm">
+							<button type="button" id="langAr" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">AR</button>
+							<button type="button" id="langEn" class="rounded-full px-3 py-1.5 font-semibold transition duration-300">EN</button>
 						</div>
 					</div>
 				</nav>
 			</header>
 
-			<main class="mx-auto w-full max-w-7xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
-				<section class="reveal d2 mb-8">
-					<div class="card-hover rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-2xl backdrop-blur-3xl transition duration-300 hover:-translate-y-2 hover:shadow-2xl sm:p-8">
-						<h1 id="welcomeTitle" class="font-display text-3xl text-darkGray sm:text-4xl font-bold">أهلاً وسهلاً</h1>
-						<p id="welcomeSubtitle" class="mt-2 text-lg text-darkGray/70">مرحباً بك في لوحة تحكم الدفعة 43</p>
+			<main class="mx-auto w-full max-w-7xl px-5 pb-24 pt-10 sm:px-8 sm:pt-14">
+				<section class="mb-6 flex justify-center">
+					<div class="glass-card logo-pulse flex h-20 w-20 items-center justify-center rounded-full">
+						<img
+							src="306845207_752117652624147_287869835984670059_n.jpg"
+							alt="شعار كلية العلوم الرياضية والحاسوب"
+							class="h-16 w-16 rounded-full object-cover drop-shadow-[0_12px_30px_rgba(191,219,254,0.7)]"
+							onerror="this.style.display='none'"
+						/>
 					</div>
 				</section>
 
-				<section class="reveal d3 mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+				<section class="mb-8">
+					<div class="glass-card relative rounded-3xl px-6 py-6 shadow-soft-2xl sm:px-8 sm:py-8">
+						<div id="welcomeText" class="space-y-3 text-right">
+							<h1 id="welcomeTitle" class="font-display text-2xl font-bold text-darkGray sm:text-3xl">مرحباً بك،</h1>
+							<p id="welcomeName" class="text-lg font-semibold text-darkGray/80">Student Name</p>
+							<div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/60 px-3 py-1 text-xs font-semibold text-purple-700 shadow-soft-lg">
+								<span id="statusText">عضو معتمد | الدفعة 43</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="grid grid-cols-2 gap-4 md:grid-cols-4">
 					<a
 						id="coursesCard"
 						href="lectures.html"
 						title="اذهب إلى صفحة المحاضرات"
-						class="card-hover block rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl transition duration-300 hover:shadow-2xl"
+						class="glass-card card-hover flex aspect-square flex-col items-start justify-between rounded-3xl p-5"
 					>
-						<h2 class="flex items-center gap-3 font-display text-xl font-bold text-darkGray">
-							<i data-lucide="book-open" class="h-8 w-8 text-sky-500"></i>
-							<span id="coursesTitle">المواد والمحاضرات</span>
-						</h2>
-						<p id="coursesDesc" class="mt-4 text-sm leading-7 text-darkGray/80">وصول سريع وآمن لموادك ومحاضراتك، مُنظمة حسب تخصصك الحالي.</p>
-						<div class="mt-5">
-							<span id="coursesButton" class="inline-flex items-center gap-2 rounded-xl border border-accentIndigo/30 bg-white/85 px-4 py-2 text-sm font-semibold text-accentIndigo transition hover:bg-accentIndigo/10">
-								فتح المحاضرات
-							</span>
+						<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 shadow-soft-lg">
+							<i data-lucide="book-open" class="h-6 w-6 text-accentIndigo"></i>
+						</div>
+						<div>
+							<h2 id="coursesTitle" class="font-display text-base font-semibold text-darkGray">المواد والمحاضرات</h2>
+							<p id="coursesDesc" class="mt-1 text-xs text-darkGray/70">وصول سريع لمحتواك الدراسي.</p>
 						</div>
 					</a>
 
@@ -145,35 +141,14 @@
 						id="batchAffairsCard"
 						href="batch_affairs.html"
 						title="اذهب إلى صفحة مجتمع الدفعة"
-						class="card-hover block rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl transition duration-300 hover:shadow-2xl"
+						class="glass-card card-hover flex aspect-square flex-col items-start justify-between rounded-3xl p-5"
 					>
-						<h2 class="flex items-center gap-3 font-display text-xl font-bold text-darkGray">
-							<i data-lucide="briefcase-business" class="h-8 w-8 text-violet-400"></i>
-							<span id="batchAffairsTitle">مجتمع الدفعة</span>
-						</h2>
-						<p id="batchAffairsDesc" class="mt-4 text-sm leading-7 text-darkGray/80">أسرة الدفعة، الخزينة، وكل ما يهم مجتمعنا.</p>
-						<div class="mt-5">
-							<span id="batchAffairsButton" class="inline-flex items-center gap-2 rounded-xl border border-violet-300/40 bg-white/85 px-4 py-2 text-sm font-semibold text-violet-700 transition hover:bg-violet-50/80">
-								دخول المجتمع
-							</span>
+						<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 shadow-soft-lg">
+							<i data-lucide="messages-square" class="h-6 w-6 text-violet-500"></i>
 						</div>
-					</a>
-
-					<a
-						id="profileCard"
-						href="profile.html"
-						title="اذهب إلى صفحة الملف الشخصي"
-						class="card-hover block rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl transition duration-300 hover:shadow-2xl"
-					>
-						<h2 class="flex items-center gap-3 font-display text-xl font-bold text-darkGray">
-							<i data-lucide="user-round" class="h-8 w-8 text-violet-500"></i>
-							<span id="profileTitle">الملف الشخصي</span>
-						</h2>
-						<p class="mt-4 text-sm text-darkGray/70"><span id="nameLabel" class="font-semibold">الاسم:</span> <span id="nameValue">Student Name</span></p>
-						<div class="mt-5">
-							<span id="profileButton" class="inline-flex items-center gap-2 rounded-xl border border-violet-300/40 bg-white/85 px-4 py-2 text-sm font-semibold text-violet-700 transition hover:bg-violet-50/80">
-								عرض الملف الشخصي
-							</span>
+						<div>
+							<h2 id="batchAffairsTitle" class="font-display text-base font-semibold text-darkGray">مجتمع الدفعة</h2>
+							<p id="batchAffairsDesc" class="mt-1 text-xs text-darkGray/70">مشاركة سريعة مع زملائك.</p>
 						</div>
 					</a>
 
@@ -181,68 +156,93 @@
 						id="alertsCard"
 						href="alerts.html"
 						title="اذهب إلى صفحة التنبيهات"
-						class="card-hover block rounded-3xl border border-white/70 bg-white/90 p-6 shadow-soft-xl backdrop-blur-3xl transition duration-300 hover:shadow-2xl"
+						class="glass-card card-hover flex aspect-square flex-col items-start justify-between rounded-3xl p-5"
 					>
-						<h2 class="flex items-center gap-3 font-display text-xl font-bold text-darkGray">
-							<i data-lucide="bell" class="h-8 w-8 text-emerald-500"></i>
-							<span id="alertsTitle">التنبيهات</span>
-						</h2>
-						<p id="alertsDesc" class="mt-4 text-sm leading-7 text-darkGray/80">تابع آخر المستجدات والإعلانات الرسمية هنا.</p>
-						<div class="mt-5">
-							<span id="alertsButton" class="inline-flex items-center gap-2 rounded-xl border border-emerald-300/40 bg-white/85 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50/80">
-								فتح التنبيهات
-							</span>
+						<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 shadow-soft-lg">
+							<i data-lucide="bell" class="h-6 w-6 text-emerald-500"></i>
+						</div>
+						<div>
+							<h2 id="alertsTitle" class="font-display text-base font-semibold text-darkGray">التنبيهات</h2>
+							<p id="alertsDesc" class="mt-1 text-xs text-darkGray/70">آخر المستجدات أولاً.</p>
+						</div>
+					</a>
+
+					<a
+						id="profileCard"
+						href="profile.html"
+						title="اذهب إلى صفحة الملف الشخصي"
+						class="glass-card card-hover flex aspect-square flex-col items-start justify-between rounded-3xl p-5"
+					>
+						<div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/70 shadow-soft-lg">
+							<i data-lucide="id-card" class="h-6 w-6 text-sky-500"></i>
+						</div>
+						<div>
+							<h2 id="profileTitle" class="font-display text-base font-semibold text-darkGray">الملف الشخصي</h2>
+							<p class="mt-1 text-xs text-darkGray/70"><span id="nameLabel" class="font-semibold">الاسم:</span> <span id="nameValue">Student Name</span></p>
 						</div>
 					</a>
 				</section>
 			</main>
+
+			<nav class="glass-card fixed bottom-5 left-1/2 z-20 flex w-[90%] max-w-sm -translate-x-1/2 items-center justify-between rounded-2xl px-4 py-3 shadow-soft-xl md:hidden">
+				<a href="lectures.html" class="flex flex-col items-center text-xs text-darkGray/70">
+					<i data-lucide="book-open" class="h-5 w-5 text-accentIndigo"></i>
+					<span class="mt-1">المواد</span>
+				</a>
+				<a href="batch_affairs.html" class="flex flex-col items-center text-xs text-darkGray/70">
+					<i data-lucide="messages-square" class="h-5 w-5 text-violet-500"></i>
+					<span class="mt-1">المجتمع</span>
+				</a>
+				<a href="alerts.html" class="flex flex-col items-center text-xs text-darkGray/70">
+					<i data-lucide="bell" class="h-5 w-5 text-emerald-500"></i>
+					<span class="mt-1">التنبيهات</span>
+				</a>
+				<a href="profile.html" class="flex flex-col items-center text-xs text-darkGray/70">
+					<i data-lucide="id-card" class="h-5 w-5 text-sky-500"></i>
+					<span class="mt-1">الملف</span>
+				</a>
+			</nav>
 		</div>
 
 		<script>
 			const i18n = {
 				ar: {
 					title: "بوابة الطلاب | لوحة التحكم",
-					welcomeTitle: "أهلاً وسهلاً",
-					welcomeSubtitle: "مرحباً بك في لوحة تحكم الدفعة 43",
+					welcomeTitle: "مرحباً بك،",
+					welcomeName: "Student Name",
+					statusText: "عضو معتمد | الدفعة 43",
 					coursesCardTooltip: "اذهب إلى صفحة المحاضرات",
 					coursesTitle: "المواد والمحاضرات",
-					coursesDesc: "وصول سريع وآمن لموادك ومحاضراتك، مُنظمة حسب تخصصك الحالي.",
-					coursesButton: "فتح المحاضرات",
+					coursesDesc: "وصول سريع لمحتواك الدراسي.",
 					batchAffairsCardTooltip: "اذهب إلى صفحة مجتمع الدفعة",
 					batchAffairsTitle: "مجتمع الدفعة",
-					batchAffairsDesc: "أسرة الدفعة، الخزينة، وكل ما يهم مجتمعنا.",
-					batchAffairsButton: "دخول المجتمع",
+					batchAffairsDesc: "مشاركة سريعة مع زملائك.",
 					profileCardTooltip: "اذهب إلى صفحة الملف الشخصي",
 					profileTitle: "الملف الشخصي",
 					nameLabel: "الاسم:",
 					nameValue: "Student Name",
-					profileButton: "عرض الملف الشخصي",
 					alertsCardTooltip: "اذهب إلى صفحة التنبيهات",
 					alertsTitle: "التنبيهات",
-					alertsDesc: "تابع آخر المستجدات والإعلانات الرسمية هنا.",
-					alertsButton: "فتح التنبيهات",
+					alertsDesc: "آخر المستجدات أولاً.",
 				},
 				en: {
 					title: "Student Portal | Dashboard",
-					welcomeTitle: "Welcome Back",
-					welcomeSubtitle: "Welcome to Batch 43 dashboard",
+					welcomeTitle: "Welcome,",
+					welcomeName: "Student Name",
+					statusText: "Verified Member | Batch 43",
 					coursesCardTooltip: "Go to lectures page",
 					coursesTitle: "Lectures & Courses",
-					coursesDesc: "Fast and secure access to your materials and lectures, organized by your current major.",
-					coursesButton: "Open Lectures",
+					coursesDesc: "Quick access to your materials.",
 					batchAffairsCardTooltip: "Go to batch community page",
 					batchAffairsTitle: "Batch Community",
-					batchAffairsDesc: "Batch family, treasury, and everything that matters to our community.",
-					batchAffairsButton: "Enter Community",
+					batchAffairsDesc: "Share and connect fast.",
 					profileCardTooltip: "Go to profile page",
 					profileTitle: "Student Profile",
 					nameLabel: "Name:",
 					nameValue: "Student Name",
-					profileButton: "View Profile",
 					alertsCardTooltip: "Go to alerts page",
 					alertsTitle: "Alerts",
-					alertsDesc: "Follow the latest updates and official announcements here.",
-					alertsButton: "Open Alerts",
+					alertsDesc: "Latest updates first.",
 				},
 			};
 
@@ -250,24 +250,22 @@
 				langAr: document.getElementById("langAr"),
 				langEn: document.getElementById("langEn"),
 				welcomeTitle: document.getElementById("welcomeTitle"),
-				welcomeSubtitle: document.getElementById("welcomeSubtitle"),
+				welcomeName: document.getElementById("welcomeName"),
+				statusText: document.getElementById("statusText"),
+				welcomeText: document.getElementById("welcomeText"),
 				coursesCard: document.getElementById("coursesCard"),
 				coursesTitle: document.getElementById("coursesTitle"),
 				coursesDesc: document.getElementById("coursesDesc"),
-				coursesButton: document.getElementById("coursesButton"),
 				batchAffairsCard: document.getElementById("batchAffairsCard"),
 				batchAffairsTitle: document.getElementById("batchAffairsTitle"),
 				batchAffairsDesc: document.getElementById("batchAffairsDesc"),
-				batchAffairsButton: document.getElementById("batchAffairsButton"),
 				profileCard: document.getElementById("profileCard"),
 				profileTitle: document.getElementById("profileTitle"),
 				nameLabel: document.getElementById("nameLabel"),
 				nameValue: document.getElementById("nameValue"),
-				profileButton: document.getElementById("profileButton"),
 				alertsCard: document.getElementById("alertsCard"),
 				alertsTitle: document.getElementById("alertsTitle"),
 				alertsDesc: document.getElementById("alertsDesc"),
-				alertsButton: document.getElementById("alertsButton"),
 			};
 
 			let currentLang = "ar";
@@ -286,24 +284,22 @@
 				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 				document.title = t.title;
 				el.welcomeTitle.textContent = t.welcomeTitle;
-				el.welcomeSubtitle.textContent = t.welcomeSubtitle;
+				el.welcomeName.textContent = t.welcomeName;
+				el.statusText.textContent = t.statusText;
+				el.welcomeText.className = "space-y-3 " + (lang === "ar" ? "text-right" : "text-left");
 				el.coursesCard.title = t.coursesCardTooltip;
 				el.coursesTitle.textContent = t.coursesTitle;
 				el.coursesDesc.textContent = t.coursesDesc;
-				el.coursesButton.textContent = t.coursesButton;
 				el.batchAffairsCard.title = t.batchAffairsCardTooltip;
 				el.batchAffairsTitle.textContent = t.batchAffairsTitle;
 				el.batchAffairsDesc.textContent = t.batchAffairsDesc;
-				el.batchAffairsButton.textContent = t.batchAffairsButton;
 				el.profileCard.title = t.profileCardTooltip;
 				el.profileTitle.textContent = t.profileTitle;
 				el.nameLabel.textContent = t.nameLabel;
 				el.nameValue.textContent = t.nameValue;
-				el.profileButton.textContent = t.profileButton;
 				el.alertsCard.title = t.alertsCardTooltip;
 				el.alertsTitle.textContent = t.alertsTitle;
 				el.alertsDesc.textContent = t.alertsDesc;
-				el.alertsButton.textContent = t.alertsButton;
 				updateLanguageButtons();
 			}
 

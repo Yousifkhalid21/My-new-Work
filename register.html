@@ -70,17 +70,23 @@
 				}
 			}
 
+			@keyframes logoPulse {
+				0%,
+				100% {
+					box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.24), 0 16px 36px rgba(77, 63, 142, 0.2);
+				}
+				50% {
+					box-shadow: 0 0 0 12px rgba(96, 165, 250, 0), 0 20px 45px rgba(77, 63, 142, 0.28);
+				}
+			}
+
 			:root {
-				--bg-a: #fff6f1;
-				--bg-b: #f7f2ff;
-				--bg-c: #fffdf8;
+				--bg-a: #f3e9ff;
+				--bg-b: #ffe5d7;
 			}
 
 			body {
-				background: radial-gradient(circle at 15% 10%, rgba(255, 184, 159, 0.34), transparent 32%),
-					radial-gradient(circle at 82% 18%, rgba(139, 124, 246, 0.22), transparent 38%),
-					radial-gradient(circle at 72% 88%, rgba(255, 211, 186, 0.28), transparent 34%),
-					linear-gradient(145deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+				background: linear-gradient(140deg, var(--bg-a), var(--bg-b));
 				min-height: 100vh;
 			}
 
@@ -90,13 +96,17 @@
 				backdrop-filter: blur(14px);
 			}
 
-			.geo-shape {
+			.float-shape {
 				position: absolute;
 				pointer-events: none;
 				z-index: -1;
-				border: 1px solid rgba(147, 51, 234, 0.18);
-				background: linear-gradient(155deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1));
-				backdrop-filter: blur(8px);
+				border: 1px solid rgba(255, 255, 255, 0.18);
+				background: linear-gradient(155deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+				backdrop-filter: blur(28px);
+			}
+
+			.logo-orb {
+				animation: logoPulse 2.8s ease-in-out infinite;
 			}
 
 			.field-shell {
@@ -135,51 +145,26 @@
 
 	<body class="min-h-screen text-darkGray antialiased selection:bg-accentPurple/20 selection:text-accentPurple">
 		<div class="relative isolate overflow-hidden">
-			<div class="geo-shape h-64 w-64 -left-20 top-20 rotate-12 [clip-path:polygon(50%_0%,100%_50%,50%_100%,0%_50%)]"></div>
-			<div class="geo-shape h-72 w-72 -right-28 bottom-8 rotate-6 [clip-path:polygon(50%_0%,95%_35%,78%_100%,22%_100%,5%_35%)]"></div>
-			<div
-				class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_15%,rgba(248,185,235,0.15),transparent_40%),radial-gradient(circle_at_85%_90%,rgba(165,142,251,0.12),transparent_45%)]"
-			></div>
-			<div class="pointer-events-none absolute top-10 -left-32 -z-10 h-80 w-80 rounded-full bg-softPink/30 blur-3xl opacity-60"></div>
-			<div class="pointer-events-none absolute bottom-10 -right-32 -z-10 h-80 w-80 rounded-full bg-softYellow/20 blur-3xl opacity-60"></div>
+			<div class="float-shape h-44 w-44 top-14 left-[8%] rotate-12 [clip-path:polygon(50%_0%,100%_45%,82%_100%,18%_100%,0%_45%)]"></div>
+			<div class="float-shape h-52 w-52 top-20 right-[10%] -rotate-12 [clip-path:polygon(20%_0%,100%_12%,88%_100%,0%_88%)]"></div>
+			<div class="float-shape h-36 w-36 top-44 left-1/2 -translate-x-1/2 rotate-6 rounded-[28px]"></div>
+			<div class="float-shape h-56 w-56 top-28 right-[36%] rotate-3 [clip-path:polygon(50%_0%,100%_38%,82%_100%,16%_92%,0%_30%)]"></div>
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_12%,rgba(139,124,246,0.22),transparent_38%),radial-gradient(circle_at_82%_18%,rgba(255,184,159,0.25),transparent_45%)]"></div>
 
-			<header class="mx-auto w-full max-w-6xl px-5 pt-6 sm:px-8">
-				<nav class="glass flex items-center justify-between rounded-2xl px-4 py-3 shadow-soft-lg sm:px-6">
-					<div class="flex items-center gap-3">
-						<span
-							class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-accentPurple to-accentIndigo font-display text-base font-bold text-white"
-							>43</span
-						>
-						<div class="leading-tight">
-							<p class="font-display text-sm tracking-wide text-darkGray">Batch 43</p>
-							<p id="facultyText" class="mt-1 text-[11px] font-light tracking-wide text-darkGray/60 sm:text-xs">كلية العلوم الرياضية والحاسوب</p>
-						</div>
-					</div>
+			<section class="mx-auto flex w-full max-w-6xl justify-center px-5 pt-6 sm:px-8 sm:pt-8">
+				<div class="logo-orb inline-flex h-16 w-16 items-center justify-center rounded-full p-1.5 sm:h-20 sm:w-20">
+					<img
+						src="306845207_752117652624147_287869835984670059_n.jpg"
+						alt="شعار كلية العلوم الرياضية والحاسوب"
+						class="h-full w-full rounded-full object-cover drop-shadow-[0_10px_25px_rgba(191,219,254,0.7)]"
+						onerror="this.style.display='none'"
+					/>
+				</div>
+			</section>
 
-					<div class="flex items-center gap-1 rounded-full border border-accentPurple/20 bg-softPurple/40 px-1 py-1 text-xs backdrop-blur-sm">
-						<button
-							type="button"
-							id="langAr"
-							class="rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5"
-						>
-							<i data-lucide="languages" class="h-3.5 w-3.5"></i>
-							<span>AR</span>
-						</button>
-						<button
-							type="button"
-							id="langEn"
-							class="rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5"
-						>
-							<i data-lucide="languages" class="h-3.5 w-3.5"></i>
-							<span>EN</span>
-						</button>
-					</div>
-				</nav>
-			</header>
-
-			<main class="mx-auto w-full max-w-6xl px-5 pb-10 pt-8 sm:px-8 sm:pt-10">
-				<section class="mx-auto max-w-xl">
-					<div class="glass rounded-3xl p-5 shadow-soft-2xl sm:p-6">
+			<main class="mx-auto w-full max-w-6xl px-5 pb-10 pt-8 sm:px-8 sm:pb-14 sm:pt-12">
+				<section class="mx-auto w-full max-w-[90%] md:max-w-[500px]">
+					<div class="glass rounded-3xl border border-white/20 p-5 shadow-[0_24px_55px_rgba(73,55,141,0.2)] sm:p-6">
 						<div class="mb-4 text-center">
 							<h1 id="pageTitle" class="font-display text-2xl font-medium text-darkGray sm:text-3xl">
 								تسجيل حساب جديد
@@ -201,7 +186,7 @@
 										type="text"
 										inputmode="numeric"
 										maxlength="6"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none"
+										class="w-full rounded-xl bg-transparent py-3 pl-10 pr-10 text-base text-darkGray outline-none"
 									/>
 									<span
 										id="idCheck"
@@ -211,9 +196,10 @@
 										✓
 									</span>
 								</div>
+								<p id="lookupStatus" class="mt-1 text-xs text-darkGray/60"></p>
 							</label>
 
-							<label class="block">
+							<label id="fullNameBlock" class="block opacity-60 blur-[0.6px] transition-all duration-500">
 								<span id="labelFullName" class="mb-1 block text-sm font-medium text-darkGray/90"
 									>الاسم الكامل</span
 								>
@@ -224,90 +210,125 @@
 										type="text"
 										disabled
 										readonly
-										class="w-full cursor-not-allowed rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray/70 outline-none"
+										class="w-full cursor-not-allowed rounded-xl bg-transparent py-3 pl-4 pr-10 text-base text-darkGray/70 outline-none"
 									/>
 								</div>
 							</label>
 
-							<label class="block">
+							<label id="majorBlock" class="block opacity-60 blur-[0.6px] transition-all duration-500">
 								<span id="labelMajor" class="mb-1 block text-sm font-medium text-darkGray/90">التخصص</span>
-								<div class="field-shell relative rounded-xl">
+								<div id="majorShell" class="field-shell relative rounded-xl">
 									<i data-lucide="scroll-text" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
 									<input
 										id="major"
 										type="text"
 										disabled
 										readonly
-										class="w-full cursor-not-allowed rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray/70 outline-none"
+										class="w-full cursor-not-allowed rounded-xl bg-transparent py-3 pl-4 pr-10 text-base text-darkGray/70 outline-none"
 									/>
 								</div>
 							</label>
 
-							<label class="block">
-								<span id="labelEmail" class="mb-1 block text-sm font-medium text-darkGray/90"
-									>البريد الإلكتروني</span
+							<div id="registerOnlyFields" class="grid gap-3">
+								<label class="block">
+									<span id="labelEmail" class="mb-1 block text-sm font-medium text-darkGray/90"
+										>البريد الإلكتروني</span
+									>
+									<div class="field-shell relative rounded-xl">
+										<i data-lucide="mail" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+										<input
+											id="email"
+											type="email"
+											class="w-full rounded-xl bg-transparent py-3 pl-4 pr-10 text-base text-darkGray outline-none transition"
+											required
+										/>
+									</div>
+								</label>
+
+								<label class="block">
+									<span id="labelPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
+										>كلمة المرور</span
+									>
+									<div id="passwordShell" class="field-shell relative rounded-xl">
+										<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+										<input
+											id="password"
+											type="password"
+											class="w-full rounded-xl bg-transparent py-3 pl-10 pr-10 text-base text-darkGray outline-none transition"
+											required
+										/>
+										<button type="button" class="toggle-visibility absolute left-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="password" aria-label="Show or hide password">
+											<i data-lucide="eye" class="h-4 w-4"></i>
+										</button>
+									</div>
+									<p id="passwordStrengthHint" class="mt-1 text-xs text-darkGray/65"></p>
+								</label>
+
+								<label class="block">
+									<span id="labelConfirmPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
+										>تأكيد كلمة المرور</span
+									>
+									<div id="confirmPasswordShell" class="field-shell relative rounded-xl">
+										<i data-lucide="lock-keyhole" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
+										<input
+											id="confirmPassword"
+											type="password"
+											class="w-full rounded-xl bg-transparent py-3 pl-10 pr-10 text-base text-darkGray outline-none transition"
+											required
+										/>
+										<button type="button" class="toggle-visibility absolute left-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="confirmPassword" aria-label="Show or hide confirm password">
+											<i data-lucide="eye" class="h-4 w-4"></i>
+										</button>
+									</div>
+									<p id="passwordMismatch" class="mt-1 hidden text-xs text-[#d9776a]">كلمات المرور غير متطابقة</p>
+								</label>
+
+								<button
+									type="submit"
+									id="registerButton"
+									class="cta-glow cta-disabled mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3.5 text-base font-bold text-white shadow-soft-lg transition duration-300"
+									disabled
 								>
-								<div class="field-shell relative rounded-xl">
-									<i data-lucide="mail" class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
-									<input
-										id="email"
-										type="email"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-4 pr-10 text-darkGray outline-none transition"
-										required
-									/>
-								</div>
-							</label>
+									تسجيل حساب
+								</button>
+							</div>
 
-							<label class="block">
-								<span id="labelPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
-									>كلمة المرور</span
+							<div id="loginOnlyFields" class="hidden grid gap-3">
+								<div id="loginPasswordBlock" class="hidden opacity-0 translate-y-2 transition-all duration-500 grid gap-3">
+									<label class="block">
+										<span id="labelLoginPassword" class="mb-1 block text-sm font-medium text-darkGray/90">كلمة المرور</span>
+										<div id="loginPasswordShell" class="field-shell relative rounded-xl">
+											<span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-darkGray/45">
+												<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+													<rect x="3" y="11" width="18" height="10" rx="2"></rect>
+													<path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+												</svg>
+											</span>
+											<input
+												id="loginPassword"
+												type="password"
+												class="w-full rounded-xl bg-transparent py-3 pl-10 pr-10 text-base text-darkGray outline-none transition"
+											/>
+											<button type="button" class="toggle-visibility absolute left-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="loginPassword" aria-label="Show or hide login password">
+												<i data-lucide="eye" class="h-4 w-4"></i>
+											</button>
+										</div>
+									</label>
+								</div>
+
+								<button
+									type="button"
+									id="loginButton"
+									class="cta-glow cta-disabled mt-2 w-full rounded-xl bg-gradient-to-r from-accentIndigo to-accentPurple px-6 py-3.5 text-base font-bold text-white shadow-soft-lg transition duration-300"
+									disabled
 								>
-								<div id="passwordShell" class="field-shell relative rounded-xl">
-									<i data-lucide="lock-keyhole" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
-									<input
-										id="password"
-										type="password"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none transition"
-										required
-									/>
-									<button type="button" class="toggle-visibility absolute right-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="password" aria-label="Show or hide password">
-										<i data-lucide="eye" class="h-4 w-4"></i>
-									</button>
-								</div>
-								<p id="passwordStrengthHint" class="mt-1 text-xs text-darkGray/65"></p>
-							</label>
-
-							<label class="block">
-								<span id="labelConfirmPassword" class="mb-1 block text-sm font-medium text-darkGray/90"
-									>تأكيد كلمة المرور</span
-								>
-								<div id="confirmPasswordShell" class="field-shell relative rounded-xl">
-									<i data-lucide="lock-keyhole" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-darkGray/45"></i>
-									<input
-										id="confirmPassword"
-										type="password"
-										class="w-full rounded-xl bg-transparent py-2.5 pl-10 pr-10 text-darkGray outline-none transition"
-										required
-									/>
-									<button type="button" class="toggle-visibility absolute right-3 top-1/2 -translate-y-1/2 text-darkGray/45 transition hover:text-accentIndigo" data-target="confirmPassword" aria-label="Show or hide confirm password">
-										<i data-lucide="eye" class="h-4 w-4"></i>
-									</button>
-								</div>
-								<p id="passwordMismatch" class="mt-1 hidden text-xs text-[#d9776a]">كلمات المرور غير متطابقة</p>
-							</label>
-
-							<button
-								type="submit"
-								id="registerButton"
-								class="cta-glow cta-disabled mt-2 w-full rounded-xl bg-gradient-to-r from-accentPurple to-accentIndigo px-6 py-3 text-base font-bold text-white shadow-soft-lg transition duration-300"
-								disabled
-							>
-								تسجيل
-							</button>
+									تحقق من البيانات
+								</button>
+							</div>
 
 							<p id="loginHint" class="text-center text-sm text-darkGray/70">
 								<span id="loginHintText">لديك حساب؟</span>
-								<a id="loginLink" href="signup.html" class="font-semibold text-accentIndigo hover:text-accentPurple">سجل دخول</a>
+								<a id="loginLink" href="#" class="font-semibold text-accentIndigo hover:text-accentPurple">تسجيل دخول</a>
 							</p>
 						</form>
 					</div>
@@ -319,61 +340,52 @@
 			const i18n = {
 				ar: {
 					title: "بوابة الطلاب | تسجيل حساب جديد",
-					faculty: "كلية العلوم الرياضية والحاسوب",
 					pageTitle: "تسجيل حساب جديد",
 					pageSubtitle: "أكمل البيانات التالية للانضمام إلى بوابة طلاب الدفعة 43",
+					loginTitle: "تسجيل الدخول الذكي",
+					loginSubtitle: "التعرف التلقائي على الهوية الرقمية",
 					labelStudentId: "الرقم الجامعي",
 					labelFullName: "الاسم الكامل",
 					labelMajor: "التخصص",
 					labelEmail: "البريد الإلكتروني",
 					labelPassword: "كلمة المرور",
 					labelConfirmPassword: "تأكيد كلمة المرور",
+					labelLoginPassword: "كلمة المرور",
 					passwordWeakHint: "كلمة المرور يجب أن تكون 8 أحرف على الأقل وتحتوي رقمًا ورمزًا خاصًا.",
 					passwordStrongHint: "كلمة المرور قوية.",
 					passwordMismatch: "كلمات المرور غير متطابقة",
 					registerButton: "تسجيل حساب",
 					loginHint: "لديك حساب؟",
-					loginLink: "سجل دخول",
+					loginLink: "تسجيل دخول",
+					registerHint: "ليس لديك حساب؟",
+					registerLink: "إنشاء حساب",
+					loginButton: "دخول",
+					loginButtonIdle: "تحقق من البيانات",
+					lookupIdle: "",
+					lookupLoading: "جارٍ التحقق من الرقم الجامعي...",
+					lookupSuccess: "تم العثور على بيانات الطالب.",
+					lookupFail: "لم يتم العثور على هذا الرقم.",
 					autoName: "أحمد علي حسن",
 					autoMajor: "علوم حاسوب",
 				},
-				en: {
-					title: "Student Portal | Register",
-					faculty: "Faculty of Mathematical Sciences and Computing",
-					pageTitle: "Create New Account",
-					pageSubtitle: "Complete the form below to join Batch 43 Student Portal",
-					labelStudentId: "Student ID",
-					labelFullName: "Full Name",
-					labelMajor: "Major",
-					labelEmail: "Email",
-					labelPassword: "Password",
-					labelConfirmPassword: "Confirm Password",
-					passwordWeakHint: "Password must be at least 8 characters and include a number and a special symbol.",
-					passwordStrongHint: "Strong password.",
-					passwordMismatch: "Passwords do not match",
-					registerButton: "Register Account",
-					loginHint: "Already have an account?",
-					loginLink: "Login",
-					autoName: "Ahmed Ali Hassan",
-					autoMajor: "Computer Science",
-				},
 			};
 
-			let currentLang = "ar";
+			const currentLang = "ar";
 
 			const el = {
-				langAr: document.getElementById("langAr"),
-				langEn: document.getElementById("langEn"),
-				facultyText: document.getElementById("facultyText"),
 				pageTitle: document.getElementById("pageTitle"),
 				pageSubtitle: document.getElementById("pageSubtitle"),
 				labelStudentId: document.getElementById("labelStudentId"),
 				studentId: document.getElementById("studentId"),
 				idCheck: document.getElementById("idCheck"),
+				lookupStatus: document.getElementById("lookupStatus"),
 				labelFullName: document.getElementById("labelFullName"),
 				fullName: document.getElementById("fullName"),
 				labelMajor: document.getElementById("labelMajor"),
+				fullNameBlock: document.getElementById("fullNameBlock"),
+				majorBlock: document.getElementById("majorBlock"),
 				major: document.getElementById("major"),
+				majorShell: document.getElementById("majorShell"),
 				labelEmail: document.getElementById("labelEmail"),
 				email: document.getElementById("email"),
 				labelPassword: document.getElementById("labelPassword"),
@@ -385,16 +397,36 @@
 				confirmPasswordShell: document.getElementById("confirmPasswordShell"),
 				passwordMismatch: document.getElementById("passwordMismatch"),
 				registerButton: document.getElementById("registerButton"),
+				registerOnlyFields: document.getElementById("registerOnlyFields"),
+				loginOnlyFields: document.getElementById("loginOnlyFields"),
+				loginPasswordBlock: document.getElementById("loginPasswordBlock"),
+				labelLoginPassword: document.getElementById("labelLoginPassword"),
+				loginPassword: document.getElementById("loginPassword"),
+				loginPasswordShell: document.getElementById("loginPasswordShell"),
+				loginButton: document.getElementById("loginButton"),
 				loginHint: document.getElementById("loginHint"),
 				loginHintText: document.getElementById("loginHintText"),
 				loginLink: document.getElementById("loginLink"),
 			};
+
+			const mockStudentDb = {
+				"123456": { fullName: "نورة أحمد سالم", major: "تقنية معلومات" },
+				"654321": { fullName: "سارة محمد عبدالله", major: "علوم حاسوب" },
+			};
+
+			let isLoginMode = false;
+			let identityConfirmed = false;
+			let loginPasswordFocused = false;
+			let lookupToken = 0;
 
 			function isStrongPassword(value) {
 				return /^(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(value);
 			}
 
 			function validatePasswords() {
+				if (isLoginMode) {
+					return;
+				}
 				const t = i18n[currentLang];
 				const pass = el.password.value;
 				const confirm = el.confirmPassword.value;
@@ -415,34 +447,16 @@
 				el.registerButton.classList.toggle("cta-disabled", !match);
 			}
 
-			function updateLanguageButtons() {
-				const activeClass = "bg-gradient-to-r from-accentPurple to-accentIndigo text-white shadow-soft-lg";
-				const inactiveClass = "text-darkGray/70";
-				const baseClass = "rounded-full px-3 py-1.5 font-semibold transition duration-300 inline-flex items-center gap-1.5 ";
-
-				el.langAr.className = baseClass + (currentLang === "ar" ? activeClass : inactiveClass);
-				el.langEn.className = baseClass + (currentLang === "en" ? activeClass : inactiveClass);
+			function updateLoginButton() {
+				const canLogin = identityConfirmed && loginPasswordFocused;
+				el.loginButton.disabled = !canLogin;
+				el.loginButton.classList.toggle("cta-disabled", !canLogin);
+				el.loginButton.textContent = canLogin ? i18n[currentLang].loginButton : i18n[currentLang].loginButtonIdle;
 			}
 
-			function setCheckmarkSide() {
-				if (currentLang === "ar") {
-					el.idCheck.classList.remove("right-4");
-					el.idCheck.classList.add("left-4");
-					return;
-				}
-				el.idCheck.classList.remove("left-4");
-				el.idCheck.classList.add("right-4");
-			}
-
-			function applyLanguage(lang) {
-				currentLang = lang;
-				const t = i18n[lang];
-
-				document.documentElement.lang = lang;
-				document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+			function initializeArabicContent() {
+				const t = i18n.ar;
 				document.title = t.title;
-
-				el.facultyText.textContent = t.faculty;
 				el.pageTitle.textContent = t.pageTitle;
 				el.pageSubtitle.textContent = t.pageSubtitle;
 				el.labelStudentId.textContent = t.labelStudentId;
@@ -451,19 +465,10 @@
 				el.labelEmail.textContent = t.labelEmail;
 				el.labelPassword.textContent = t.labelPassword;
 				el.labelConfirmPassword.textContent = t.labelConfirmPassword;
+				el.labelLoginPassword.textContent = t.labelLoginPassword;
 				el.registerButton.textContent = t.registerButton;
 				el.loginHintText.textContent = t.loginHint;
 				el.loginLink.textContent = t.loginLink;
-
-				const isValidId = /^\d{6}$/.test(el.studentId.value);
-				if (isValidId) {
-					el.fullName.value = t.autoName;
-					el.major.value = t.autoMajor;
-				}
-
-				updateLanguageButtons();
-				setCheckmarkSide();
-				validatePasswords();
 			}
 
 			function showCheckmark() {
@@ -477,6 +482,108 @@
 				el.idCheck.classList.remove("check-animate");
 			}
 
+			function resetIdentity() {
+				identityConfirmed = false;
+				el.fullName.value = "";
+				el.major.value = "";
+				el.fullName.parentElement.classList.remove("shadow-glow-purple");
+				el.majorShell.classList.remove("shadow-glow-purple");
+				el.fullNameBlock.classList.add("opacity-60", "blur-[0.6px]");
+				el.majorBlock.classList.add("opacity-60", "blur-[0.6px]");
+				if (isLoginMode) {
+					el.fullNameBlock.classList.add("hidden", "opacity-0", "translate-y-2");
+					el.majorBlock.classList.add("hidden", "opacity-0", "translate-y-2");
+				}
+				el.loginPasswordBlock.classList.add("hidden");
+				loginPasswordFocused = false;
+				hideCheckmark();
+			}
+
+			function setLookupStatus(message, colorClass) {
+				el.lookupStatus.textContent = message;
+				el.lookupStatus.className = "mt-1 text-xs " + colorClass;
+			}
+
+			function simulateFetchStudent(id) {
+				return new Promise((resolve) => {
+					setTimeout(() => {
+						resolve(mockStudentDb[id] || null);
+					}, 500);
+				});
+			}
+
+			async function lookupStudent(id) {
+				const t = i18n[currentLang];
+				lookupToken += 1;
+				const currentToken = lookupToken;
+				resetIdentity();
+				setLookupStatus(t.lookupLoading, "text-accentIndigo/80");
+				const result = await simulateFetchStudent(id);
+				if (currentToken !== lookupToken) {
+					return;
+				}
+				if (result) {
+					identityConfirmed = true;
+					el.fullName.value = result.fullName;
+					el.major.value = result.major;
+					el.fullName.parentElement.classList.add("shadow-glow-purple");
+					el.majorShell.classList.add("shadow-glow-purple");
+					el.fullNameBlock.classList.remove("opacity-60", "blur-[0.6px]");
+					el.majorBlock.classList.remove("opacity-60", "blur-[0.6px]");
+					if (isLoginMode) {
+						el.fullNameBlock.classList.remove("hidden");
+						el.majorBlock.classList.remove("hidden");
+						requestAnimationFrame(() => {
+							el.fullNameBlock.classList.remove("opacity-0", "translate-y-2");
+							el.majorBlock.classList.remove("opacity-0", "translate-y-2");
+						});
+					}
+					if (isLoginMode) {
+						el.loginPasswordBlock.classList.remove("hidden");
+						requestAnimationFrame(() => {
+							el.loginPasswordBlock.classList.remove("opacity-0", "translate-y-2");
+						});
+					}
+					setLookupStatus(t.lookupSuccess, "text-emerald-600");
+					showCheckmark();
+				} else {
+					identityConfirmed = false;
+					setLookupStatus(t.lookupFail, "text-[#d9776a]");
+					hideCheckmark();
+				}
+				updateLoginButton();
+			}
+
+			function setMode(nextMode) {
+				const t = i18n[currentLang];
+				isLoginMode = nextMode === "login";
+				el.registerOnlyFields.classList.toggle("hidden", isLoginMode);
+				el.loginOnlyFields.classList.toggle("hidden", !isLoginMode);
+				el.loginPasswordBlock.classList.add("hidden");
+				loginPasswordFocused = false;
+				if (isLoginMode) {
+					el.fullNameBlock.classList.add("hidden", "opacity-0", "translate-y-2");
+					el.majorBlock.classList.add("hidden", "opacity-0", "translate-y-2");
+				} else {
+					el.fullNameBlock.classList.remove("hidden", "opacity-0", "translate-y-2");
+					el.majorBlock.classList.remove("hidden", "opacity-0", "translate-y-2");
+					el.fullNameBlock.classList.add("opacity-60", "blur-[0.6px]");
+					el.majorBlock.classList.add("opacity-60", "blur-[0.6px]");
+				}
+				el.pageTitle.textContent = isLoginMode ? t.loginTitle : t.pageTitle;
+				el.pageSubtitle.textContent = isLoginMode ? t.loginSubtitle : t.pageSubtitle;
+				el.pageSubtitle.className = isLoginMode
+					? "mt-1 text-xs font-light text-darkGray/60"
+					: "mt-1.5 text-sm font-normal text-darkGray/70";
+				el.loginHintText.textContent = isLoginMode ? t.registerHint : t.loginHint;
+				el.loginLink.textContent = isLoginMode ? t.registerLink : t.loginLink;
+				el.lookupStatus.textContent = t.lookupIdle;
+				el.lookupStatus.className = "mt-1 text-xs text-darkGray/60";
+				el.loginPassword.value = "";
+				resetIdentity();
+				updateLoginButton();
+			}
+
 			el.studentId.addEventListener("input", (event) => {
 				const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, 6);
 				event.target.value = digitsOnly;
@@ -484,19 +591,15 @@
 				const validId = /^\d{6}$/.test(digitsOnly);
 
 				if (validId) {
-					showCheckmark();
-					el.fullName.value = i18n[currentLang].autoName;
-					el.major.value = i18n[currentLang].autoMajor;
+					lookupStudent(digitsOnly);
 					return;
 				}
 
-				hideCheckmark();
-				el.fullName.value = "";
-				el.major.value = "";
+				lookupToken += 1;
+				resetIdentity();
+				setLookupStatus(i18n[currentLang].lookupIdle, "text-darkGray/60");
+				updateLoginButton();
 			});
-
-			el.langAr.addEventListener("click", () => applyLanguage("ar"));
-			el.langEn.addEventListener("click", () => applyLanguage("en"));
 
 			document.querySelectorAll(".toggle-visibility").forEach((btn) => {
 				btn.addEventListener("click", () => {
@@ -519,8 +622,34 @@
 
 			el.password.addEventListener("input", validatePasswords);
 			el.confirmPassword.addEventListener("input", validatePasswords);
+			el.loginPassword.addEventListener("input", updateLoginButton);
+			el.loginPassword.addEventListener("focus", () => {
+				loginPasswordFocused = true;
+				updateLoginButton();
+			});
+			el.loginPassword.addEventListener("blur", () => {
+				loginPasswordFocused = false;
+				updateLoginButton();
+			});
+			el.loginLink.addEventListener("click", (event) => {
+				event.preventDefault();
+				setMode(isLoginMode ? "register" : "login");
+			});
+			el.registerForm = document.getElementById("registerForm");
+			el.registerForm.addEventListener("keydown", (event) => {
+				if (event.key !== "Enter") {
+					return;
+				}
+				if (!isLoginMode) {
+					return;
+				}
+				event.preventDefault();
+				el.loginButton.click();
+			});
 
-			applyLanguage("ar");
+			initializeArabicContent();
+			validatePasswords();
+			updateLoginButton();
 
 			if (window.lucide) {
 				window.lucide.createIcons();
