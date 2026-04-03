@@ -642,13 +642,13 @@
 				}
 			});
 
-			document.getElementById("registerForm").addEventListener("submit", (event) => {
+			el.registerForm = document.getElementById("registerForm");
+			el.registerForm.addEventListener("submit", (event) => {
 				event.preventDefault();
 				if (!isLoginMode && !el.registerButton.disabled) {
 					window.location.href = "dashboard.html";
 				}
 			});
-			el.registerForm = document.getElementById("registerForm");
 			el.registerForm.addEventListener("keydown", (event) => {
 				if (event.key !== "Enter") {
 					return;
